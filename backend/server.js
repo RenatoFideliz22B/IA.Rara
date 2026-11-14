@@ -14,7 +14,7 @@ app.use(express.json({ limit: '1mb' }))
 
 // Verifica se a API Key está configurada
 if (!process.env.GEMINI_API_KEY) {
-  throw new Error('A chave GEMINI_API_KEY não foi encontrada no .env')
+  throw new Error('A chave GEMINI_API_KEY não foi encontrada.')
 }
 
 // Inicializa o Gemini
@@ -71,7 +71,7 @@ ASSINATURA:
 A composição aposta em uma linguagem visual simples, mas cheia de atitude, trazendo um toque divertido e contemporâneo à marca. O resultado é uma assinatura de fácil reconhecimento, que equilibra tecnologia e informalidade, reforçando a proposta de tornar a aprendizagem mais interativa, acessível e conectada.
 
 MASCOTE:
-- A AI.rara é a personificação da inteligência artificial da TrocAÍ. Com uma personalidade comunicativa, espontânea e bem-humorada, ela chega para dar vida à plataforma, tornando a tecnologia mais próxima, acessível e presente na jornada dos alunos.
+- A AI.rara é a personificação da inteligência artificial da TrocAI. Com uma personalidade comunicativa, espontânea e bem-humorada, ela chega para dar vida à plataforma, tornando a tecnologia mais próxima, acessível e presente na jornada dos alunos.
 Mais do que uma mascote, a AI.rara atua como uma facilitadora das conexões, incentivando conversas, estimulando participações e aproximando pessoas. Sua personalidade divertida reforça o tom descontraído da marca, enquanto sua inteligência representa toda a tecnologia que movimenta a plataforma.
 É a tecnologia ganhando voz, personalidade e um jeito próprio de conectar pessoas.
 `
@@ -179,9 +179,14 @@ app.post('/api/chat', async (req, res) => {
   }
 })
 
-// Inicialização do servidor
-const PORT = process.env.PORT || 3001
+// Inicialização local
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 3001
 
-app.listen(PORT, () => {
-  console.log(`ChatGPT do PARAGUAI rodando na porta ${PORT}`)
-})
+  app.listen(PORT, () => {
+    console.log(`IA.Rara Backend rodando na porta ${PORT}`)
+  })
+}
+
+// Exportação para a Vercel
+export default app
