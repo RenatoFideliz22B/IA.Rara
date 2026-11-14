@@ -9,6 +9,11 @@ import setaAtualizar from './assets/setaAtualizar.png'
 const ASSISTANT_NAME = 'IA.Rara'
 const STORAGE_KEY = 'IA.Rara-chat'
 
+// URL do backend
+const API_URL = (
+  import.meta.env.VITE_API_URL || 'http://localhost:3001'
+).replace(/\/$/, '')
+
 function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
@@ -69,7 +74,7 @@ function App() {
     setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:3001/api/chat', {
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
