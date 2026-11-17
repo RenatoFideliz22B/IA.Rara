@@ -4,15 +4,27 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-primary: #1F3BFF;
+  --color-secondary: #C6FF00;
+  --color-accent: #0B1257;
+  --color-bg: #F5F5F5;
+  --color-bg-section: #FFFFFF;
+  --color-border: #D4D4D4;
+  --color-text: #1A1A1A;
+  --color-muted: #666666;
+  --color-success: #39C98B;
+}
+
 body {
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: 'Inter', Arial, sans-serif;
-  background: #ffffff;
-  color: #ffffff;
-  min-height: 100vh;
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -20,6 +32,21 @@ button {
   cursor: pointer;
 }
 
-#root {
-  min-height: 100vh;
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -48px;
+  padding: 8px 12px;
+  background: var(--color-bg-section);
+  color: var(--color-text);
+  z-index: 10000;
+}
+
+.skip-link:focus {
+  top: 8px;
 }

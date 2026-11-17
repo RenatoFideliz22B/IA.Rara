@@ -1,0 +1,48 @@
+.header {
+    background: var(--color-primary);
+    color: #ffffff;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    min-height: 60px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.profileLink {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.profileText {
+    font-size: 0.875rem;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid #ffffff;
+}
+
+.logo:focus-visible,
+.profileLink:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
