@@ -14,6 +14,15 @@
   --color-text: #1A1A1A;
   --color-muted: #666666;
   --color-success: #39C98B;
+
+  --ff-primary: 'Fredoka', sans-serif;
+  --ff-secondary: 'Inter', sans-serif;
+
+  --fs-display: 36px;
+  --fs-title: 20px;
+  --fs-subtitle: 16px;
+  --fs-text: 14px;
+  --fs-label: 12px;
 }
 
 body {
