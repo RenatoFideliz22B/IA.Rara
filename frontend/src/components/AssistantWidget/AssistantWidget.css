@@ -3,51 +3,123 @@
     right: 28px;
     bottom: 28px;
     z-index: 9999;
+    font-family: var(--ff-secondary);
+
+    --ia-img-w: 137.5%;
+    --ia-img-x: -18.75%;
+    --ia-img-y: -3.125%;
 }
 
-/* BOTÃO */
+:root[data-theme='fiap'] .assistant-widget {
+    --ia-img-w: 162.5%;
+    --ia-img-x: -31.25%;
+    --ia-img-y: 0%;
+}
+
+/* Imagem da IA (botão, cabeçalho e boas-vindas) */
+.assistant-launcher img,
+.assistant-avatar img,
+.welcome-icon img {
+    position: absolute;
+    display: block;
+    width: var(--ia-img-w);
+    max-width: none;
+    height: auto;
+    left: var(--ia-img-x);
+    top: var(--ia-img-y);
+    pointer-events: none;
+}
+
+/* BOTÃO FLUTUANTE
+   O ícone (iconeIAPadrao ou iconeIAFiap) já traz o círculo e a borda desenhados. */
 
 .assistant-launcher {
+    position: relative;
     width: 62px;
     height: 62px;
-    border: 2px solid var(--color-accent);
+    padding: 0;
+    border: 0;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--color-secondary);
-    color: var(--color-accent);
-    font-size: 32px;
+    background: transparent;
+    color: var(--ia-title);
+    font-size: var(--fs-display);
     font-weight: 300;
-    box-shadow:
-        0 7px 24px color-mix(in srgb, var(--color-primary) 22%, transparent),
-        0 5px 20px color-mix(in srgb, var(--color-secondary) 30%, transparent);
+    line-height: 1;
+    box-shadow: var(--shadow-card);
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 }
 
-.assistant-launcher img {
-    width: 27px !important;
-    height: 27px !important;
-    object-fit: contain;
-}
-
 .assistant-launcher:hover {
     transform: translateY(-4px) scale(1.05);
-    box-shadow:
-        0 10px 30px color-mix(in srgb, var(--color-primary) 30%, transparent),
-        0 5px 25px color-mix(in srgb, var(--color-secondary) 40%, transparent);
+    box-shadow: var(--shadow-elevated);
 }
 
 .assistant-launcher:active {
     transform: scale(0.94);
 }
 
+/* Com a janela aberta, o botão mostra o "×" */
 .launcher-active {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: #ffffff;
+    background: var(--ia-launcher-bg);
+    border: 2px solid var(--ia-border);
+}
+
+/* DICA (pop-up acima do botão) */
+
+.assistant-tip {
+    position: absolute;
+    right: 0;
+    bottom: 82px;
+    width: min(320px, calc(100vw - 32px));
+    padding: 16px 44px 16px 18px;
+    background: var(--color-bg-section);
+    border: 2px solid var(--ia-border);
+    border-radius: 20px;
+    box-shadow: var(--shadow-elevated);
+    animation: assistantOpen 0.3s ease;
+}
+
+.assistant-tip-title {
+    margin-bottom: 4px;
+    color: var(--ia-title);
+    font-family: var(--ff-primary);
+    font-size: var(--fs-text);
+    font-weight: 700;
+}
+
+.assistant-tip-text {
+    color: var(--color-text);
+    font-size: var(--fs-subtitle);
+    line-height: 1.5;
+}
+
+.assistant-tip-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-muted);
+}
+
+.assistant-tip-close:hover {
+    color: var(--color-text);
+}
+
+.assistant-tip-close svg {
+    width: 14px;
+    height: 14px;
 }
 
 /* JANELA DO ASSISTENTE */
@@ -83,9 +155,7 @@
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 
-    box-shadow:
-        0 15px 45px color-mix(in srgb, var(--color-accent) 22%, transparent),
-        0 3px 12px color-mix(in srgb, var(--color-primary) 10%, transparent);
+    box-shadow: var(--shadow-elevated);
 
     animation: assistantOpen 0.3s ease;
 }
@@ -121,21 +191,10 @@
 }
 
 .assistant-avatar {
+    position: relative;
     width: 43px;
     height: 43px;
-    display: grid;
-    place-items: center;
-    border-radius: 13px;
-    background: var(--color-secondary);
-    color: var(--color-accent);
-    font-size: 25px;
-    box-shadow: 0 3px 10px color-mix(in srgb, var(--color-primary) 15%, transparent);
-}
-
-.assistant-avatar img {
-    width: 21px !important;
-    height: 21px !important;
-    object-fit: contain;
+    flex: 0 0 auto;
 }
 
 .assistant-info {
@@ -146,8 +205,9 @@
 
 .assistant-info h2 {
     color: var(--color-text);
-    font-size: 14px;
-    font-weight: 750;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-text);
+    font-weight: 700;
 }
 
 .assistant-info>span {
@@ -155,7 +215,7 @@
     align-items: center;
     gap: 6px;
     color: var(--color-muted);
-    font-size: 10px;
+    font-size: var(--fs-label);
 }
 
 .online-indicator {
@@ -181,19 +241,19 @@
     border-radius: 10px;
     background: var(--color-bg);
     color: var(--color-text);
-    font-size: 19px;
+    box-shadow: var(--shadow-soft);
     transition: 0.2s ease;
 }
 
 .assistant-control-button img {
-    width: 16px !important;
-    height: 16px !important;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
+    filter: var(--ia-icon-filter);
 }
 
 .assistant-control-button:hover {
-    background: color-mix(in srgb, var(--color-primary) 10%, var(--color-bg-section));
-    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-secondary) 18%, var(--color-bg-section));
     transform: rotate(45deg);
 }
 
@@ -238,37 +298,24 @@
 }
 
 .welcome-icon {
+    position: relative;
     width: 65px;
     height: 65px;
-    display: grid;
-    place-items: center;
     margin-bottom: 21px;
-    border-radius: 19px;
-    background: color-mix(in srgb, var(--color-primary) 10%, var(--color-bg-section));
-    color: var(--color-accent);
-    font-size: 33px;
-    box-shadow:
-        0 5px 15px color-mix(in srgb, var(--color-primary) 12%, transparent),
-        0 3px 10px color-mix(in srgb, var(--color-secondary) 20%, transparent);
-}
-
-.welcome-icon img {
-    width: 27px !important;
-    height: 27px !important;
-    object-fit: contain;
 }
 
 .assistant-welcome h3 {
     margin-bottom: 9px;
     color: var(--color-text);
-    font-size: 17px;
-    font-weight: 750;
+    font-family: var(--ff-primary);
+    font-size: var(--fs-subtitle);
+    font-weight: 700;
 }
 
 .assistant-welcome p {
     max-width: 285px;
     color: var(--color-muted);
-    font-size: 12px;
+    font-size: var(--fs-text);
     line-height: 1.7;
 }
 
@@ -284,7 +331,7 @@
     max-width: 88%;
     padding: 12px 15px;
     border-radius: 16px;
-    font-size: 13px;
+    font-size: var(--fs-text);
     line-height: 1.65;
     white-space: pre-wrap;
     overflow-wrap: anywhere;
@@ -292,10 +339,10 @@
 
 .user-message {
     align-self: flex-end;
-    background: var(--color-primary);
-    color: #ffffff;
+    background: var(--ia-user-bg);
+    color: var(--color-white);
     border-bottom-right-radius: 5px;
-    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-primary) 17%, transparent);
+    box-shadow: var(--shadow-soft);
 }
 
 .ai-message {
@@ -304,7 +351,7 @@
     color: var(--color-text);
     border: 1px solid var(--color-border);
     border-bottom-left-radius: 5px;
-    box-shadow: 0 3px 10px color-mix(in srgb, var(--color-accent) 6%, transparent);
+    box-shadow: var(--shadow-soft);
 }
 
 /* INDICADOR DE CARREGAMENTO */
@@ -320,7 +367,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--color-primary);
+    background: var(--ia-title);
     animation: loadingDots 1s infinite ease-in-out;
 }
 
@@ -366,13 +413,13 @@
     border: 1px solid var(--color-border);
     border-radius: 16px;
     background: var(--color-bg-section);
-    box-shadow: 0 3px 12px color-mix(in srgb, var(--color-accent) 6%, transparent);
+    box-shadow: var(--shadow-soft);
     transition: 0.2s ease;
 }
 
 .assistant-form:focus-within {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent);
+    border-color: var(--color-focus);
+    box-shadow: var(--shadow-focus);
 }
 
 .assistant-form input {
@@ -383,7 +430,7 @@
     outline: none;
     background: transparent;
     color: var(--color-text);
-    font-size: 12px;
+    font-size: var(--fs-text);
 }
 
 .assistant-form input::placeholder {
@@ -397,17 +444,17 @@
     place-items: center;
     border: none;
     border-radius: 11px;
-    background: var(--color-primary);
-    color: #ffffff;
-    font-size: 23px;
+    background: var(--ia-user-bg);
+    color: var(--color-white);
+    font-size: var(--fs-title);
     font-weight: 600;
-    box-shadow: 0 3px 8px color-mix(in srgb, var(--color-primary) 20%, transparent);
+    box-shadow: var(--shadow-soft);
     transition: 0.2s ease;
 }
 
 .assistant-form button:hover:not(:disabled) {
     transform: scale(1.06);
-    box-shadow: 0 5px 12px color-mix(in srgb, var(--color-primary) 30%, transparent);
+    box-shadow: var(--shadow-card);
 }
 
 .assistant-form button:disabled {
@@ -420,7 +467,7 @@
 .assistant-disclaimer {
     margin-top: 10px;
     color: var(--color-muted);
-    font-size: 9px;
+    font-size: var(--fs-label);
     text-align: center;
     line-height: 1.5;
 }
@@ -436,7 +483,7 @@
 }
 
 .ai-message strong {
-    font-weight: 750;
+    font-weight: 700;
     color: var(--color-text);
 }
 
@@ -459,25 +506,26 @@
 .ai-message h3 {
     margin: 10px 0 6px;
     color: var(--color-text);
-    font-weight: 750;
+    font-family: var(--ff-primary);
+    font-weight: 700;
 }
 
 .ai-message h1 {
-    font-size: 18px;
+    font-size: var(--fs-title);
 }
 
 .ai-message h2 {
-    font-size: 16px;
+    font-size: var(--fs-subtitle);
 }
 
 .ai-message h3 {
-    font-size: 14px;
+    font-size: var(--fs-text);
 }
 
 .ai-message blockquote {
     margin: 8px 0;
     padding-left: 12px;
-    border-left: 3px solid var(--color-primary);
+    border-left: 3px solid var(--ia-title);
     color: var(--color-muted);
 }
 
@@ -492,6 +540,10 @@
     .assistant-launcher {
         width: 56px;
         height: 56px;
+    }
+
+    .assistant-tip {
+        bottom: 72px;
     }
 
     .assistant-window {

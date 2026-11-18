@@ -2,8 +2,10 @@
 import ReactMarkdown from 'react-markdown'
 import { useState, useEffect } from 'react'
 import './AssistantWidget.css'
+import useTema from '../../hooks/useTema'
 
-import iconeRara from '../../assets/iconeRara.png'
+import iconeIAPadrao from '../../assets/iconeIAPadrao.png'
+import iconeIAFiap from '../../assets/iconeIAFiap.png'
 import setaAtualizar from '../../assets/setaAtualizar.png'
 
 const ASSISTANT_NAME = 'IA.Rara'
@@ -14,10 +16,31 @@ const API_URL = (
     import.meta.env.VITE_API_URL || 'http://localhost:3001'
 ).replace(/\/$/, '')
 
-function AssistantWidget() {
+// A prop "dica" (opcional) mostra um pop-up com uma dica acima do botão da IA.
+function AssistantWidget({ dica }) {
     const [isOpen, setIsOpen] = useState(false)
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
+    const [dicaFechada, setDicaFechada] = useState(false)
+
+    // Ícone da IA de acordo com o tema atual
+    const tema = useTema()
+    const iconeIA = tema === 'fiap' ? iconeIAFiap : iconeIAPadrao
+
+    const dicaVisivel = Boolean(dica) && !dicaFechada && !isOpen
+
+    // Fecha a dica com a tecla Esc
+    useEffect(() => {
+        if (!dicaVisivel) return undefined
+
+        function fecharComEsc(event) {
+            if (event.key === 'Escape') setDicaFechada(true)
+        }
+
+        document.addEventListener('keydown', fecharComEsc)
+
+        return () => document.removeEventListener('keydown', fecharComEsc)
+    }, [dicaVisivel])
 
     // Recupera as mensagens salvas
     const [messages, setMessages] = useState(() => {
@@ -130,15 +153,7 @@ function AssistantWidget() {
                         <div className="assistant-identity">
 
                             <div className="assistant-avatar">
-                                <img
-                                    src={iconeRara}
-                                    alt=""
-                                    style={{
-                                        width: '25px',
-                                        height: '25px',
-                                        objectFit: 'contain'
-                                    }}
-                                />
+                                <img src={iconeIA} alt="" />
                             </div>
 
                             <div className="assistant-info">
@@ -185,15 +200,7 @@ function AssistantWidget() {
                             <div className="assistant-welcome">
 
                                 <div className="welcome-icon">
-                                    <img
-                                        src={iconeRara}
-                                        alt=""
-                                        style={{
-                                            width: '33px',
-                                            height: '33px',
-                                            objectFit: 'contain'
-                                        }}
-                                    />
+                                    <img src={iconeIA} alt="" />
                                 </div>
 
                                 <h3>Olá! Como posso ajudar?</h3>
@@ -276,6 +283,32 @@ function AssistantWidget() {
                 </section>
             )}
 
+            {/* DICA (POP-UP ACIMA DO BOTÃO) */}
+
+            {dicaVisivel && (
+                <div className="assistant-tip" role="status">
+                    <p className="assistant-tip-title">{ASSISTANT_NAME}</p>
+                    <p className="assistant-tip-text">{dica}</p>
+
+                    <button
+                        type="button"
+                        className="assistant-tip-close"
+                        aria-label="Fechar dica"
+                        onClick={() => setDicaFechada(true)}
+                    >
+                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                            <path
+                                d="M4 4l8 8M12 4 4 12"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.8"
+                                strokeLinecap="round"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            )}
+
             {/* BOTÃO FLUTUANTE */}
 
             <button
@@ -285,19 +318,7 @@ function AssistantWidget() {
                 aria-label={isOpen ? 'Fechar assistente' : 'Abrir assistente'}
                 aria-expanded={isOpen}
             >
-                {isOpen ? (
-                    '×'
-                ) : (
-                    <img
-                        src={iconeRara}
-                        alt=""
-                        style={{
-                            width: '32px',
-                            height: '32px',
-                            objectFit: 'contain'
-                        }}
-                    />
-                )}
+                {isOpen ? '×' : <img src={iconeIA} alt="" />}
             </button>
 
         </div>
