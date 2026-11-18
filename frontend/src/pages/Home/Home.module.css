@@ -1,27 +1,31 @@
+
 .container {
     width: min(768px, calc(100% - 32px));
     margin: 0 auto;
     padding-bottom: 32px;
 }
 
-.container__progress {
+/* META COLETIVA */
+
+.metaCard {
     width: 100%;
     margin: 32px 0 24px;
     padding: 24px 24px 20px;
     background: var(--color-bg-section);
     border: 1px solid var(--color-border);
     border-radius: 16px;
+    box-shadow: var(--shadow-card);
 }
 
-.container__progress_percentage {
+.metaTopo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
 }
 
-.container__progress_percentage-texts-title {
-    color: #8c8c8c;
+.metaRotulo {
+    color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     font-weight: 600;
@@ -30,7 +34,7 @@
     text-transform: uppercase;
 }
 
-.container__progress_percentage-texts-subtitle {
+.metaSubtitulo {
     margin-top: 4px;
     color: var(--color-text);
     font-family: var(--ff-secondary);
@@ -39,7 +43,7 @@
     line-height: 1.2;
 }
 
-.container__progress_percentage-number {
+.metaPorcentagem {
     flex: 0 0 auto;
     color: var(--color-text);
     font-family: var(--ff-secondary);
@@ -48,7 +52,7 @@
     line-height: 1;
 }
 
-.container__progress_bar {
+.barra {
     position: relative;
     height: 10px;
     margin: 28px 14px 36px;
@@ -56,20 +60,20 @@
     border-radius: 999px;
 }
 
-.container__progress_bar-progress {
+.barraPreenchida {
     height: 100%;
     background: var(--color-secondary);
     border-radius: 999px;
 }
 
-.container__progress_bar-mark {
+.marco {
     position: absolute;
     top: 50%;
     left: var(--mark);
     z-index: 1;
     width: 26px;
     height: 26px;
-    border: 2px solid #ffffff;
+    border: 2px solid var(--color-text);
     border-radius: 50%;
     background: var(--color-secondary);
     color: var(--color-text);
@@ -79,29 +83,29 @@
     place-items: center;
 }
 
-.container__progress_bar-mark--locked {
+.marcoBloqueado {
     background: var(--color-border);
     border-color: var(--color-border);
-    color: #969696;
+    color: var(--color-muted);
     box-shadow: none;
 }
 
-.container__progress_bar-icon {
+.marcoIcone {
     width: 14px;
     height: 14px;
     display: block;
 }
 
-.container__progress_bar-mark--locked .container__progress_bar-icon {
+.marcoBloqueado .marcoIcone {
     width: 13px;
     height: 13px;
 }
 
-.container__progress_bar-mark-label {
+.marcoRotulo {
     position: absolute;
     top: calc(100% + 8px);
     left: 50%;
-    color: #8c8c8c;
+    color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     font-weight: 500;
@@ -110,7 +114,7 @@
     transform: translateX(-50%);
 }
 
-.container__progress_prize {
+.premio {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -125,34 +129,18 @@
     line-height: 1.3;
 }
 
-.container__progress_prize-icon {
+.premioIcone {
     width: 16px;
     height: 16px;
     flex: 0 0 auto;
     color: var(--color-muted);
 }
 
-.container__progress_prize strong {
+.premio strong {
     font-weight: 700;
 }
 
-.container__progress_button {
-    width: 100%;
-    padding: 12px 16px;
-    border: 0;
-    border-radius: 12px;
-    background: var(--color-secondary);
-    color: var(--color-text);
-    font-family: var(--ff-secondary);
-    font-size: var(--fs-text);
-    font-weight: 700;
-    line-height: 1.2;
-    transition: background-color 0.15s ease;
-}
-
-.container__progress_button:hover {
-    background: color-mix(in srgb, var(--color-secondary) 88%, #000);
-}
+/* MODAIS */
 
 .modal {
     position: fixed;
@@ -161,20 +149,21 @@
     display: grid;
     place-items: center;
     padding: 24px 16px;
-    background: rgb(31 59 255 / 78%);
+    background: var(--color-bg-modal);
     overflow-y: auto;
 }
 
-.modal__janela {
+.modalJanela {
     width: min(480px, 100%);
     max-height: calc(100vh - 48px);
     overflow: auto;
     padding: 20px 20px 16px;
     background: var(--color-bg-section);
     border-radius: 16px;
+    box-shadow: var(--shadow-elevated);
 }
 
-.modal__topo {
+.modalTopo {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -182,7 +171,7 @@
     margin-bottom: 18px;
 }
 
-.modal__titulo {
+.modalTitulo {
     color: var(--color-text);
     font-family: var(--ff-secondary);
     font-size: var(--fs-subtitle);
@@ -190,7 +179,7 @@
     line-height: 1.3;
 }
 
-.modal__fechar {
+.modalFechar {
     display: grid;
     place-items: center;
     width: 32px;
@@ -201,19 +190,20 @@
     border-radius: 8px;
     background: transparent;
     color: var(--color-muted);
+    cursor: pointer;
 }
 
-.modal__fechar svg {
+.modalFechar svg {
     width: 16px;
     height: 16px;
 }
 
-.modal__fechar:hover {
+.modalFechar:hover {
     color: var(--color-text);
 }
 
-.modal__secao {
-    color: #8c8c8c;
+.modalSecao {
+    color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     font-weight: 600;
@@ -222,27 +212,29 @@
     text-transform: uppercase;
 }
 
-.modal__status {
+/* STATUS COLETIVO */
+
+.modalStatus {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-top: 10px;
 }
 
-.modal__status_item {
+.modalStatusItem {
     padding: 12px 14px;
     border: 1px solid var(--color-border);
     border-radius: 12px;
 }
 
-.modal__status_rotulo {
-    color: #8c8c8c;
+.modalStatusRotulo {
+    color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     line-height: 1.2;
 }
 
-.modal__status_valor {
+.modalStatusValor {
     margin-top: 4px;
     color: var(--color-text);
     font-family: var(--ff-secondary);
@@ -251,7 +243,7 @@
     line-height: 1.2;
 }
 
-.modal__barra {
+.modalBarra {
     height: 8px;
     margin: 14px 0;
     background: var(--color-accent);
@@ -259,13 +251,13 @@
     overflow: hidden;
 }
 
-.modal__barra_progresso {
+.modalBarraPreenchida {
     height: 100%;
     background: var(--color-secondary);
     border-radius: 999px;
 }
 
-.modal__premio {
+.modalPremio {
     display: flex;
     align-items: flex-start;
     gap: 12px;
@@ -274,7 +266,7 @@
     border-radius: 12px;
 }
 
-.modal__premio_icone {
+.modalPremioIcone {
     width: 18px;
     height: 18px;
     flex: 0 0 auto;
@@ -282,14 +274,14 @@
     color: var(--color-muted);
 }
 
-.modal__premio_kicker {
-    color: #8c8c8c;
+.modalPremioRotulo {
+    color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     line-height: 1.3;
 }
 
-.modal__premio_titulo {
+.modalPremioTitulo {
     margin-top: 2px;
     color: var(--color-text);
     font-family: var(--ff-secondary);
@@ -298,7 +290,7 @@
     line-height: 1.3;
 }
 
-.modal__premio_texto {
+.modalPremioTexto {
     margin-top: 2px;
     color: var(--color-muted);
     font-family: var(--ff-secondary);
@@ -306,7 +298,9 @@
     line-height: 1.3;
 }
 
-.modal__privado {
+/* MISSÕES INDIVIDUAIS */
+
+.modalPrivado {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -314,7 +308,7 @@
     margin-top: 18px;
 }
 
-.modal__pontos {
+.modalPontos {
     flex: 0 0 auto;
     color: var(--color-text);
     font-family: var(--ff-secondary);
@@ -323,7 +317,7 @@
     line-height: 1.2;
 }
 
-.modal__privado_texto {
+.modalPrivadoTexto {
     margin-top: 6px;
     color: var(--color-muted);
     font-family: var(--ff-secondary);
@@ -331,97 +325,183 @@
     line-height: 1.4;
 }
 
-.modal__acoes {
+.modalAcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     margin-top: 12px;
     border: 1px solid var(--color-border);
     border-radius: 12px;
     overflow: hidden;
 }
 
-.modal__acao {
+.modalAcao {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 12px 14px;
+    width: 100%;
+    padding: 14px;
+    border: 0;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-section);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    text-decoration: none;
+    cursor: default;
+    transition: background-color 0.15s ease;
+}
+
+.modalAcao:last-child {
+    border-bottom: 0;
+}
+
+.modalAcaoLink,
+.modalAcaoBotao {
     cursor: pointer;
 }
 
-.modal__acao + .modal__acao {
-    border-top: 1px solid var(--color-border);
+.modalAcaoLink:hover,
+.modalAcaoBotao:hover {
+    background: var(--color-bg);
 }
 
-.modal__acao input {
-    width: 18px;
-    height: 18px;
+.modalAcaoLink:focus-visible,
+.modalAcaoBotao:focus-visible {
+    position: relative;
+    outline: 2px solid var(--color-focus);
+    outline-offset: -3px;
+}
+
+.modalAcaoBolinha {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
     flex: 0 0 auto;
     margin-top: 1px;
     border: 2px solid var(--color-border);
     border-radius: 50%;
-    background: var(--color-bg-section);
-    appearance: none;
+    background: transparent;
+    color: #FFFFFF;
 }
 
-.modal__acao input:checked {
-    border-color: var(--color-secondary);
-    background: var(--color-secondary);
+.modalAcaoBolinhaConcluida {
+    border-color: #39C98B;
+    background: #39C98B;
 }
 
-.modal__acao input:focus-visible {
-    outline: 3px solid var(--color-primary);
-    outline-offset: 2px;
+.modalAcaoBolinha .marcoIcone {
+    width: 12px;
+    height: 12px;
 }
 
-.modal__acao_titulo,
-.modal__acao_pontos {
+.modalAcaoConteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1;
+}
+
+.modalAcaoTitulo,
+.modalAcaoDescricao,
+.modalAcaoPontos {
     display: block;
     font-family: var(--ff-secondary);
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
-.modal__acao_titulo {
+.modalAcaoTitulo {
     color: var(--color-text);
     font-size: var(--fs-text);
     font-weight: 600;
 }
 
-.modal__acao_pontos {
-    color: #8c8c8c;
+.modalAcaoDescricao {
+    color: var(--color-muted);
     font-size: var(--fs-label);
 }
 
-.modal__rodape {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 16px;
+.modalAcaoPontos {
+    color: var(--color-muted);
+    font-size: var(--fs-label);
+    font-weight: 600;
 }
 
-.modal__proximo {
-    padding: 8px 16px;
-    border: 0;
-    border-radius: 10px;
-    background: var(--color-secondary);
+.modalAcaoConcluida .modalAcaoTitulo {
+    color: var(--color-text);
+}
+
+/* FORMULÁRIO DO ENCONTRO */
+
+.formEncontro {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.perguntaFormulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.perguntaFormularioTitulo {
     color: var(--color-text);
     font-family: var(--ff-secondary);
     font-size: var(--fs-text);
-    font-weight: 700;
-    line-height: 1.2;
-    transition: background-color 0.15s ease;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-.modal__proximo:hover {
-    background: color-mix(in srgb, var(--color-secondary) 88%, #000);
+.perguntaFormulario textarea {
+    width: 100%;
+    min-height: 88px;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    outline: none;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    line-height: 1.4;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.container__salas {
+.perguntaFormulario textarea::placeholder {
+    color: var(--color-muted);
+    opacity: 0.8;
+}
+
+.perguntaFormulario textarea:focus {
+    border-color: var(--color-focus);
+    box-shadow: var(--shadow-focus);
+}
+
+.modalRodape {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+/* SALAS E ENCONTROS */
+
+.salas {
     width: 100%;
     margin: 0;
     padding: 24px;
     background: var(--color-bg-section);
     border: 1px solid var(--color-border);
     border-radius: 16px;
+    box-shadow: var(--shadow-card);
 }
 
-.container__salas_titulo {
+.salasTitulo {
     color: var(--color-text);
     font-family: var(--ff-secondary);
     font-size: var(--fs-subtitle);
@@ -429,7 +509,7 @@
     line-height: 1.3;
 }
 
-.container__salas_texto {
+.salasTexto {
     margin-top: 4px;
     color: var(--color-muted);
     font-family: var(--ff-secondary);
@@ -437,9 +517,9 @@
     line-height: 1.4;
 }
 
-.container__salas_rotulo,
-.container__salas_encontro-kicker {
-    color: #8c8c8c;
+.salasRotulo,
+.encontroRotulo {
+    color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     font-weight: 600;
@@ -448,12 +528,12 @@
     text-transform: uppercase;
 }
 
-.container__salas_rotulo {
+.salasRotulo {
     margin-top: 18px;
 }
 
-.container__salas_lista,
-.container__salas_perguntas {
+.salasLista,
+.perguntasLista {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -462,14 +542,14 @@
     list-style: none;
 }
 
-.container__salas_lista {
+.salasLista {
     gap: 0;
     border: 1px solid var(--color-border);
     border-radius: 12px;
     overflow: hidden;
 }
 
-.container__salas_item {
+.salaItem {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -477,20 +557,19 @@
     border-bottom: 1px solid var(--color-border);
 }
 
-.container__salas_item:last-child {
+.salaItem:last-child {
     border-bottom: 0;
 }
 
-.container__salas_icone {
+.salaIcone {
+    display: block;
     flex: 0 0 auto;
+    width: 22px;
+    height: 22px;
     color: var(--color-text);
-    font-family: var(--ff-secondary);
-    font-size: var(--fs-subtitle);
-    font-weight: 600;
-    line-height: 1;
 }
 
-.container__salas_info {
+.salaInfo {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -498,7 +577,7 @@
     flex: 1;
 }
 
-.container__salas_nome {
+.salaNome {
     color: var(--color-text);
     font-family: var(--ff-secondary);
     font-size: var(--fs-text);
@@ -506,41 +585,25 @@
     line-height: 1.3;
 }
 
-.container__salas_detalhe {
+.salaDetalhe {
     color: var(--color-muted);
     font-family: var(--ff-secondary);
     font-size: var(--fs-label);
     line-height: 1.3;
 }
 
-.container__salas_entrar {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+.salaEntrar {
     flex: 0 0 auto;
-    padding: 8px 14px;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    background: var(--color-bg-section);
-    color: var(--color-text);
-    font-family: var(--ff-secondary);
-    font-size: var(--fs-label);
-    font-weight: 600;
-    line-height: 1.2;
-    text-decoration: none;
-    cursor: pointer;
 }
 
-.container__salas_entrar:hover {
-    background: var(--color-bg);
-}
-
-.container__salas_entrar-icone {
+.salaEntrarIcone {
     width: 16px;
     height: 16px;
 }
 
-.container__salas_painel {
+/* ENCONTRO GUIADO */
+
+.encontroPainel {
     margin-top: 16px;
     padding: 16px;
     background: var(--color-bg);
@@ -548,13 +611,13 @@
     border-radius: 12px;
 }
 
-.container__salas_encontro {
+.encontro {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.container__salas_encontro-icone {
+.encontroIcone {
     display: grid;
     place-items: center;
     width: 36px;
@@ -565,12 +628,12 @@
     color: var(--color-muted);
 }
 
-.container__salas_encontro-icone svg {
+.encontroIcone svg {
     width: 18px;
     height: 18px;
 }
 
-.container__salas_encontro-textos {
+.encontroTextos {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -578,7 +641,7 @@
     flex: 1;
 }
 
-.container__salas_encontro-titulo {
+.encontroTitulo {
     color: var(--color-text);
     font-family: var(--ff-secondary);
     font-size: var(--fs-text);
@@ -586,25 +649,13 @@
     line-height: 1.3;
 }
 
-.container__salas_participar {
+.encontroBotao {
     flex: 0 0 auto;
-    padding: 12px 14px;
-    border: 0;
-    border-radius: 10px;
-    background: var(--color-secondary);
-    color: var(--color-text);
-    font-family: var(--ff-secondary);
-    font-size: var(--fs-text);
-    font-weight: 700;
-    line-height: 1.2;
-    transition: background-color 0.15s ease;
 }
 
-.container__salas_participar:hover {
-    background: color-mix(in srgb, var(--color-secondary) 88%, #000);
-}
+/* PERGUNTAS E RESPOSTAS */
 
-.container__salas_perguntas-rotulo {
+.perguntasRotulo {
     margin-top: 16px;
     color: var(--color-muted);
     font-family: var(--ff-secondary);
@@ -613,7 +664,7 @@
     line-height: 1.3;
 }
 
-.container__salas_pergunta {
+.pergunta {
     padding: 12px 14px;
     border: 1px solid var(--color-border);
     border-radius: 12px;
@@ -624,112 +675,201 @@
     line-height: 1.4;
 }
 
+.respostasEncontro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.respostaCard {
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-bg-section);
+}
+
+.respostaPergunta {
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.respostaTexto {
+    margin-top: 6px;
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.participantesEncontro {
+    margin-top: 8px;
+    padding: 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-bg-section);
+}
+
+.participantesTitulo {
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.participantesTexto {
+    margin-top: 4px;
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    line-height: 1.4;
+}
+
+.participantesLista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.participanteItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.participanteAvatar {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--color-bg);
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    font-weight: 600;
+}
+
+.participanteInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+}
+
+.participanteInfo strong {
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.participanteInfo span {
+    color: var(--color-muted);
+}
+
+/* TELAS GRANDES */
+
 @media (min-width: 2400px) and (min-height: 1200px) {
     .container {
         width: min(1024px, calc(100% - 48px));
         padding-bottom: 56px;
     }
 
-    .container__progress {
+    .metaCard {
         margin: 56px 0 32px;
         padding: 40px 36px 36px;
     }
 
-    .container__progress_percentage-texts-title,
-    .container__progress_bar-mark-label,
-    .container__progress_prize,
-    .container__progress_button {
+    .metaRotulo,
+    .marcoRotulo,
+    .premio {
         font-size: 16px;
     }
 
-    .container__progress_percentage-texts-subtitle {
+    .metaSubtitulo {
         font-size: 26px;
     }
 
-    .container__progress_percentage-number {
+    .metaPorcentagem {
         font-size: 48px;
     }
 
-    .container__progress_bar {
+    .barra {
         height: 14px;
         margin: 40px 18px 52px;
     }
 
-    .container__progress_bar-mark {
+    .marco {
         width: 34px;
         height: 34px;
     }
 
-    .container__progress_bar-icon {
+    .marcoIcone {
         width: 18px;
         height: 18px;
     }
 
-    .container__progress_prize {
+    .premio {
         padding: 14px 18px;
     }
 
-    .container__progress_button {
-        padding: 16px 20px;
-    }
-
-    .container__salas {
+    .salas {
         padding: 32px 36px 39px;
     }
 
-    .container__salas_titulo {
+    .salasTitulo {
         font-size: 22px;
     }
 
-    .container__salas_texto,
-    .container__salas_nome,
-    .container__salas_encontro-titulo,
-    .container__salas_pergunta,
-    .container__salas_participar {
+    .salasTexto,
+    .salaNome,
+    .encontroTitulo,
+    .pergunta {
         font-size: 18px;
     }
 
-    .container__salas_rotulo,
-    .container__salas_encontro-kicker,
-    .container__salas_detalhe,
-    .container__salas_entrar,
-    .container__salas_perguntas-rotulo {
+    .salasRotulo,
+    .encontroRotulo,
+    .salaDetalhe,
+    .perguntasRotulo {
         font-size: 15px;
     }
 
-    .container__salas_rotulo {
+    .salasRotulo {
         margin-top: 32px;
     }
 
-    .container__salas_item {
+    .salaItem {
         padding: 22px;
     }
 
-    .container__salas_icone {
+    .salaIcone {
         font-size: 22px;
     }
 
-    .container__salas_entrar {
-        padding: 10px 18px;
-    }
-
-    .container__salas_painel {
+    .encontroPainel {
         margin-top: 24px;
         padding: 28px;
     }
 
-    .container__salas_perguntas {
+    .perguntasLista {
         gap: 18px;
     }
 
-    .container__salas_pergunta {
+    .pergunta {
         padding: 20px 18px;
     }
 
-    .container__salas_participar {
-        padding: 14px 18px;
-    }
 }
+
+/* RESPONSIVIDADE */
 
 @media (max-width: 480px) {
     .container {
@@ -737,54 +877,50 @@
         padding-bottom: 96px;
     }
 
-    .container__progress {
+    .metaCard {
         margin: 16px 0;
         padding: 16px;
     }
 
-    .container__progress_percentage {
+    .metaTopo {
         gap: 12px;
     }
 
-    .container__progress_percentage-texts-subtitle {
+    .metaSubtitulo {
         font-size: 18px;
     }
 
-    .container__progress_percentage-number {
+    .metaPorcentagem {
         font-size: 32px;
     }
 
-    .container__progress_bar {
+    .barra {
         margin: 22px 14px 32px;
     }
 
-    .container__progress_prize {
+    .premio {
         align-items: flex-start;
     }
 
-    .container__salas {
+    .salas {
         padding: 16px;
     }
 
-    .container__salas_item {
+    .salaItem {
         gap: 8px;
         padding: 12px;
     }
 
-    .container__salas_entrar {
-        padding: 8px 10px;
-    }
-
-    .container__salas_painel {
+    .encontroPainel {
         padding: 12px;
     }
 
-    .container__salas_encontro {
+    .encontro {
         flex-wrap: wrap;
         align-items: flex-start;
     }
 
-    .container__salas_participar {
+    .encontroBotao {
         flex: 1 0 100%;
     }
 
@@ -792,16 +928,24 @@
         padding: 12px;
     }
 
-    .modal__janela {
+    .modalJanela {
         max-height: calc(100vh - 24px);
         padding: 16px;
     }
 
-    .modal__status {
+    .modalStatus {
         gap: 8px;
     }
 
-    .modal__status_item {
+    .modalStatusItem {
         padding: 10px 12px;
+    }
+
+    .modalRodape {
+        flex-direction: column-reverse;
+    }
+
+    .modalRodape > * {
+        width: 100%;
     }
 }

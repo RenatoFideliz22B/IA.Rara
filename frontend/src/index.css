@@ -5,16 +5,45 @@
 }
 
 :root {
+  /* CORES BASE */
   --color-primary: #1F3BFF;
   --color-secondary: #C6FF00;
   --color-accent: #0B1257;
   --color-bg: #F5F5F5;
   --color-bg-section: #FFFFFF;
+  --color-bg-modal: rgb(31 59 255 / 78%);
+  --color-bg-glow: color-mix(in srgb, var(--color-secondary) 75%, transparent);
   --color-border: #D4D4D4;
   --color-text: #1A1A1A;
   --color-muted: #666666;
+  --color-white: #FFFFFF;
   --color-success: #39C98B;
+  --color-error: #dc2626;
+  --color-add-button: var(--color-primary);
+  --color-add-button-hover: #172FD6;
+  --color-secondary-hover: #A8D900;
+  --color-avatar-selected: var(--color-accent);
 
+  /* FOCO (cor do contorno ao navegar pelo teclado) */
+  --color-focus: var(--color-primary);
+
+  /* IA (botão flutuante, dica e mensagens) */
+  --ia-launcher-bg: var(--color-secondary);
+  --ia-border: var(--color-accent);
+  --ia-title: var(--color-primary);
+  --ia-user-bg: var(--color-primary);
+  --ia-icon-filter: none;
+
+  /* SOMBRAS */
+  --color-button-shadow: var(--color-accent);
+  --shadow-soft: 0 2px 8px rgb(0 0 0 / 8%);
+  --shadow-card: 0 4px 16px rgb(0 0 0 / 8%);
+  --shadow-elevated: 0 12px 32px rgb(0 0 0 / 18%);
+  --shadow-focus: 0 0 0 3px color-mix(in srgb, var(--color-focus) 20%, transparent);
+  --shadow-focus-error: 0 0 0 3px color-mix(in srgb, var(--color-error) 20%, transparent);
+  --shadow-button-solid: 0 4px 0 var(--color-button-shadow);
+
+  /* FONTES */
   --ff-primary: 'Fredoka', sans-serif;
   --ff-secondary: 'Inter', sans-serif;
 
@@ -25,10 +54,43 @@
   --fs-label: 12px;
 }
 
+:root[data-theme='fiap'] {
+  --color-primary: #0B0B0B;
+  --color-secondary: #ED145B;
+  --color-accent: #2C2C2C;
+  --color-bg: #0B0B0B;
+  --color-bg-section: #1B1B1B;
+  --color-bg-modal: rgb(11 11 11 / 78%);
+  --color-bg-glow: color-mix(in srgb, var(--color-secondary) 18%, transparent);
+  --color-border: #2E2E2E;
+  --color-text: #FFFFFF;
+  --color-muted: #B8B8B8;
+  --color-add-button: var(--color-secondary);
+  --color-add-button-hover: #8A0B35;
+  --color-secondary-hover: #8A0B35;
+  --color-avatar-selected: #8A0B35;
+
+  /* No tema FIAP a cor primária é preta, então o foco usa o rosa */
+  --color-focus: var(--color-secondary);
+
+  --ia-launcher-bg: var(--color-bg-section);
+  --ia-border: var(--color-secondary);
+  --ia-title: var(--color-secondary);
+  --ia-user-bg: var(--color-secondary-hover);
+  --ia-icon-filter: invert(1);
+
+  --color-button-shadow: var(--color-secondary-hover);
+  --shadow-soft: 0 2px 8px rgb(0 0 0 / 40%);
+  --shadow-card: 0 4px 16px rgb(0 0 0 / 45%);
+  --shadow-elevated: 0 12px 32px rgb(0 0 0 / 60%);
+
+  --ff-primary: 'Poppins', sans-serif;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--ff-secondary);
 }
 
 button,
@@ -42,7 +104,7 @@ button {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-primary);
+  outline: 3px solid var(--color-focus);
   outline-offset: 2px;
 }
 

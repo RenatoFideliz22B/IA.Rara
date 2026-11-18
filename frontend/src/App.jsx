@@ -1,3 +1,5 @@
+
+import { useEffect } from 'react'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import AuthLayout from './components/layout/AuthLayout'
 import AppLayout from './components/layout/AppLayout'
@@ -8,6 +10,17 @@ import Perfil from './pages/Perfil/Perfil'
 import Sala from './pages/Sala/Sala'
 
 export default function App() {
+
+  useEffect(() => {
+    const temaSalvo = localStorage.getItem('trocaiTema')
+
+    if (temaSalvo === 'fiap') {
+      document.documentElement.dataset.theme = 'fiap'
+    } else {
+      delete document.documentElement.dataset.theme
+    }
+  }, [])
+
   return (
     <HashRouter>
       <Routes>
