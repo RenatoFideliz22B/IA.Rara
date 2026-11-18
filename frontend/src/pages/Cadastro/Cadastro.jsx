@@ -5,6 +5,8 @@ import styles from './Cadastro.module.css'
 import Button from '../../components/ui/Button/Button'
 import AssistantWidget from '../../components/AssistantWidget/AssistantWidget'
 
+import { interesses, salasPorInteresse } from '../../data/salas'
+
 import avatarUm from '../../assets/avatars/1.png'
 import avatarDois from '../../assets/avatars/2.png'
 import avatarTres from '../../assets/avatars/3.png'
@@ -43,18 +45,6 @@ const avataresFiap = [
     { id: 14, imagem: avatarQuatorze },
     { id: 15, imagem: avatarQuinze },
     { id: 16, imagem: avatarDezesseis }
-]
-
-const interesses = [
-    'Trabalho e estudo',
-    'Estudo de madrugada',
-    'Jogos indie',
-    'Café e code',
-    'Primeira graduação',
-    'Mãe e estudante',
-    'Podcasts',
-    'Leitura',
-    'Música'
 ]
 
 export default function Cadastro() {
@@ -280,7 +270,7 @@ export default function Cadastro() {
                                 aria-pressed={interessesSelecionados.includes(interesse)}
                                 onClick={() => selecionarInteresse(interesse)}
                             >
-                                #{interesse.replaceAll(' ', '')}
+                                {salasPorInteresse[interesse].tag}
                             </button>
                         ))}
                     </div>

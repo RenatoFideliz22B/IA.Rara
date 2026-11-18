@@ -1,33 +1,18 @@
 
 import { useEffect, useRef, useState } from 'react'
-
 import { Link } from 'react-router-dom'
-
-import {
-    Briefcase,
-    MoonStars,
-    GameController,
-    Coffee,
-    GraduationCap,
-    Baby,
-    Headphones,
-    BookOpen,
-    MusicNotes,
-    BookmarkSimple
-} from '@phosphor-icons/react'
-
+import { BookmarkSimple } from '@phosphor-icons/react'
 import avatarTres from '../../assets/avatars/3.png'
 import avatarOnze from '../../assets/avatars/11.png'
-
-import styles from './Home.module.css'
+import { salasPorInteresse, obterTotalOnline } from '../../data/salas'
 import Button from '../../components/ui/Button/Button'
+import styles from './Home.module.css'
 
 const marcos = [
     { valor: 30, rotulo: '30%' },
     { valor: 60, rotulo: '60%' },
     { valor: 100, rotulo: '100%' },
 ]
-
 
 const acoes = [
     {
@@ -50,100 +35,21 @@ const acoes = [
     },
 ]
 
-
-// Correspondência entre as tags do Cadastro e as salas da Home
-const salasPorInteresse = {
-    'Trabalho e estudo': {
-        id: 'equilibrio-em-foco',
-        nome: 'equilibrio-em-foco',
-        detalhe: 'Trabalho e estudo',
-        online: 9,
-        icone: Briefcase
-    },
-
-    'Estudo de madrugada': {
-        id: 'corujas-da-madrugada',
-        nome: 'corujas-da-madrugada',
-        detalhe: 'Estudo de madrugada',
-        online: 4,
-        icone: MoonStars
-    },
-
-    'Jogos indie': {
-        id: 'indieverso',
-        nome: 'indieverso',
-        detalhe: 'Jogos indie',
-        online: 6,
-        icone: GameController
-    },
-
-    'Café e code': {
-        id: 'cafe-e-code',
-        nome: 'cafe-e-code',
-        detalhe: 'Café e code',
-        online: 6,
-        icone: Coffee
-    },
-
-    'Primeira graduação': {
-        id: 'primeiros-passos',
-        nome: 'primeiros-passos',
-        detalhe: 'Primeira graduação',
-        online: 5,
-        icone: GraduationCap
-    },
-
-    'Mãe e estudante': {
-        id: 'maes-em-conexao',
-        nome: 'maes-em-conexao',
-        detalhe: 'Mãe e estudante',
-        online: 3,
-        icone: Baby
-    },
-
-    'Podcasts': {
-        id: 'entre-episodios',
-        nome: 'entre-episodios',
-        detalhe: 'Podcasts',
-        online: 7,
-        icone: Headphones
-    },
-
-    'Leitura': {
-        id: 'clube-do-capitulo',
-        nome: 'clube-do-capitulo',
-        detalhe: 'Leitura',
-        online: 8,
-        icone: BookOpen
-    },
-
-    'Música': {
-        id: 'sintonia',
-        nome: 'sintonia',
-        detalhe: 'Música',
-        online: 5,
-        icone: MusicNotes
-    }
-}
-
-
 function obterSalasDoPerfil() {
-    const dadosSalvos = localStorage.getItem('trocaiPerfil')
+    const perfilSalvo = localStorage.getItem('trocaiPerfil')
 
-    if (!dadosSalvos) return []
+    if (!perfilSalvo) return []
 
-    try {
-        const perfil = JSON.parse(dadosSalvos)
+    const perfil = JSON.parse(perfilSalvo)
 
-        return (perfil.interesses || [])
-            .map((interesse) => salasPorInteresse[interesse])
-            .filter(Boolean)
-
-    } catch {
-        return []
-    }
+    return (perfil.interesses || [])
+        .map(interesse => salasPorInteresse[interesse])
+        .filter(Boolean)
+        .map(sala => ({
+            ...sala,
+            online: obterTotalOnline(sala)
+        }))
 }
-
 
 const perguntas = [
     {
@@ -160,14 +66,12 @@ const perguntas = [
     },
 ]
 
-
 // Respostas fictícias para demonstrar a participação de outro aluno.
 const respostasParticipante = {
     hobby: 'Gosto de desenhar e jogar videogame. É uma forma de descansar depois de um dia cheio.',
     dica: 'Dividir tarefas grandes em pequenas etapas. Assim, fica muito mais fácil começar.',
     horario: 'Prefiro estudar à noite, quando consigo ficar mais concentrado.'
 }
-
 
 function IconeCheck() {
     return (
@@ -184,7 +88,6 @@ function IconeCheck() {
     )
 }
 
-
 function IconeCadeado({ classe }) {
     return (
         <svg className={classe || styles.marcoIcone} viewBox="0 0 16 16" aria-hidden="true">
@@ -199,7 +102,6 @@ function IconeCadeado({ classe }) {
         </svg>
     )
 }
-
 
 function IconePresente() {
     return (
@@ -217,7 +119,6 @@ function IconePresente() {
     )
 }
 
-
 function IconeEntrar() {
     return (
         <svg className={styles.salaEntrarIcone} viewBox="0 0 16 16" aria-hidden="true">
@@ -232,7 +133,6 @@ function IconeEntrar() {
     )
 }
 
-
 function IconeCalendario() {
     return (
         <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -242,36 +142,20 @@ function IconeCalendario() {
     )
 }
 
-
 function BotaoEntrar({ sala }) {
-    const conteudo = (
-        <>
+    return (
+        <Button
+            to={`/sala/${sala.id}`}
+            variant="neutral"
+            size="sm"
+            className={styles.salaEntrar}
+            aria-label={`Entrar na sala ${sala.nome}`}
+        >
             <IconeEntrar />
             Entrar
-        </>
-    )
-
-    if (sala.id === 'cafe-e-code') {
-        return (
-            <Button
-                to="/sala/cafe-e-code"
-                variant="neutral"
-                size="sm"
-                className={styles.salaEntrar}
-                aria-label={`Entrar na sala ${sala.nome}`}
-            >
-                {conteudo}
-            </Button>
-        )
-    }
-
-    return (
-        <Button variant="neutral" size="sm" className={styles.salaEntrar}>
-            {conteudo}
         </Button>
     )
 }
-
 
 function Salas({
     salas,
@@ -283,7 +167,7 @@ function Salas({
     const avatarParticipante = localStorage.getItem('trocaiTema') === 'fiap'
         ? avatarOnze
         : avatarTres
-        
+
     return (
         <section className={styles.salas} aria-labelledby="titulo-salas">
             <h2 id="titulo-salas" className={styles.salasTitulo}>
@@ -313,10 +197,12 @@ function Salas({
                                 />
 
                                 <span className={styles.salaInfo}>
-                                    <span className={styles.salaNome}>{sala.nome}</span>
+                                    <span className={styles.salaNome}>
+                                        {sala.hashtag}
+                                    </span>
 
                                     <span className={styles.salaDetalhe}>
-                                        {sala.detalhe} · {sala.online} online
+                                        {sala.tag} · {sala.online} online
                                     </span>
                                 </span>
 
@@ -383,7 +269,6 @@ function Salas({
                             </div>
                         ))}
 
-
                         <div className={styles.participantesEncontro}>
                             <p className={styles.participantesTitulo}>
                                 Outros participantes
@@ -449,7 +334,6 @@ function Salas({
         </section>
     )
 }
-
 
 function ModalMeta({
     aberto,
@@ -622,7 +506,6 @@ function ModalMeta({
     )
 }
 
-
 function ModalEncontro({
     aberto,
     onFechar,
@@ -701,7 +584,6 @@ function ModalEncontro({
     )
 }
 
-
 export default function Home() {
     const [aberto, setAberto] = useState(false)
     const [encontroModalAberto, setEncontroModalAberto] = useState(false)
@@ -726,7 +608,6 @@ export default function Home() {
     const botaoEncontroRef = useRef(null)
     const fecharEncontroRef = useRef(null)
 
-
     const participando = respostasEnviadas !== null
 
     const pontos = acoes
@@ -739,12 +620,10 @@ export default function Home() {
         + (missoesConcluidas.includes('bio') ? 1 : 0)
         + (missoesConcluidas.includes('encontro') ? 2 : 0)
 
-
     function abrirModalEncontro() {
         setAberto(false)
         setEncontroModalAberto(true)
     }
-
 
     function irParaEncontro() {
         setAberto(false)
@@ -757,14 +636,12 @@ export default function Home() {
         }, 150)
     }
 
-
     function atualizarResposta(id, valor) {
         setRespostas((anterior) => ({
             ...anterior,
             [id]: valor
         }))
     }
-
 
     function enviarRespostas(event) {
         event.preventDefault()
@@ -780,7 +657,6 @@ export default function Home() {
         setEncontroModalAberto(false)
     }
 
-
     useEffect(() => {
         if (!aberto) return undefined
 
@@ -793,9 +669,7 @@ export default function Home() {
         }
 
         document.addEventListener('keydown', fecharNoEscape)
-
         document.body.style.overflow = 'hidden'
-
         fecharRef.current?.focus()
 
         return () => {
@@ -804,7 +678,6 @@ export default function Home() {
             botao?.focus()
         }
     }, [aberto])
-
 
     useEffect(() => {
         if (!encontroModalAberto) return undefined
@@ -818,9 +691,7 @@ export default function Home() {
         }
 
         document.addEventListener('keydown', fecharNoEscape)
-
         document.body.style.overflow = 'hidden'
-
         fecharEncontroRef.current?.focus()
 
         return () => {
@@ -829,7 +700,6 @@ export default function Home() {
             botao?.focus()
         }
     }, [encontroModalAberto])
-
 
     return (
         <section className={styles.container}>
