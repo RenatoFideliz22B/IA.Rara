@@ -5,6 +5,8 @@
 }
 
 :root {
+  color-scheme: light;
+
   /* CORES BASE */
   --color-primary: #1F3BFF;
   --color-secondary: #C6FF00;
@@ -18,11 +20,22 @@
   --color-muted: #666666;
   --color-white: #FFFFFF;
   --color-success: #39C98B;
+  --color-on-success: #0B0B0B;
   --color-error: #dc2626;
   --color-add-button: var(--color-primary);
   --color-add-button-hover: #172FD6;
   --color-secondary-hover: #A8D900;
   --color-avatar-selected: var(--color-accent);
+  --color-avatar-border: var(--color-primary);
+
+  /* TEXTO COM BOM CONTRASTE (use no lugar de --color-primary / --color-success / --color-error em textos) */
+  --color-text-accent: var(--color-primary);
+  --color-success-text: #15803D;
+  --color-error-text: var(--color-error);
+
+  /* BALÕES DE CONVERSA (mensagem de outras pessoas usa --color-bg) */
+  --color-bubble-own-bg: color-mix(in srgb, var(--color-primary) 8%, var(--color-bg-section));
+  --color-bubble-own-border: color-mix(in srgb, var(--color-primary) 28%, var(--color-bg-section));
 
   /* FOCO (cor do contorno ao navegar pelo teclado) */
   --color-focus: var(--color-primary);
@@ -55,6 +68,8 @@
 }
 
 :root[data-theme='fiap'] {
+  color-scheme: dark;
+
   --color-primary: #0B0B0B;
   --color-secondary: #ED145B;
   --color-accent: #2C2C2C;
@@ -69,6 +84,15 @@
   --color-add-button-hover: #8A0B35;
   --color-secondary-hover: #8A0B35;
   --color-avatar-selected: #8A0B35;
+  --color-avatar-border: var(--color-secondary);
+
+  /* O rosa puro tem pouco contraste como texto sobre o fundo escuro, então usamos versões mais claras */
+  --color-text-accent: #FF4D8D;
+  --color-success-text: var(--color-success);
+  --color-error-text: #FF6B6B;
+
+  --color-bubble-own-bg: color-mix(in srgb, var(--color-secondary) 16%, var(--color-bg-section));
+  --color-bubble-own-border: color-mix(in srgb, var(--color-secondary) 45%, var(--color-bg-section));
 
   /* No tema FIAP a cor primária é preta, então o foco usa o rosa */
   --color-focus: var(--color-secondary);

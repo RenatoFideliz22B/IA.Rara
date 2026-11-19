@@ -1,8 +1,17 @@
-
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useState, useRef } from 'react'
-import { Phone, Video, ShieldCheck, Paperclip, Send } from 'lucide-react'
+import {
+    ArrowLeftIcon,
+    PaperclipIcon,
+    PaperPlaneRightIcon,
+    PhoneIcon,
+    ShieldCheckIcon,
+    ShuffleIcon,
+    VideoCameraIcon
+} from '@phosphor-icons/react'
 
+import Button from '../../components/ui/Button/Button'
+import useTema from '../../hooks/useTema'
 import styles from './Sala.module.css'
 import { salasPorInteresse } from '../../data/salas'
 
@@ -15,17 +24,19 @@ export default function Sala() {
 
     if (!salaEncontrada) {
         return (
-            <main className={styles.container}>
-                <div className={styles.roomLayout}>
-                    <section className={styles.chatArea}>
-                        <h2>Sala não encontrada</h2>
+            <section className={styles.container}>
+                <div className={styles.naoEncontrada}>
+                    <h2 className={styles.salaTitulo}>Sala não encontrada</h2>
 
-                        <Link to="/praca">
-                            Voltar à Praça
-                        </Link>
-                    </section>
+                    <p className={styles.naoEncontradaTexto}>
+                        Essa sala não existe. Volte para a Praça e escolha uma das suas salas.
+                    </p>
+
+                    <Button to="/praca" variant="primary">
+                        Voltar à Praça
+                    </Button>
                 </div>
-            </main>
+            </section>
         )
     }
 
@@ -33,22 +44,11 @@ export default function Sala() {
 }
 
 function ConteudoSala({ sala }) {
+    const tema = useTema()
     const participantes = sala.participantes
+    const codigoSala = `#${sala.id.replaceAll('-', '')}`
 
-    function obterMensagensIniciais() {
-        return sala.mensagens.map(mensagem => {
-            const participante = participantes.find(
-                pessoa => pessoa.nome === mensagem.autor
-            )
-
-            return {
-                ...mensagem,
-                avatar: participante?.avatar || participantes[1]?.avatar
-            }
-        })
-    }
-
-    const [mensagens, setMensagens] = useState(obterMensagensIniciais)
+    const [mensagens, setMensagens] = useState(sala.mensagens)
     const [texto, setTexto] = useState('')
     const [audioAtivo, setAudioAtivo] = useState(false)
     const [videoAtivo, setVideoAtivo] = useState(false)
@@ -58,9 +58,14 @@ function ConteudoSala({ sala }) {
     const mensagensRef = useRef(null)
     const arquivoRef = useRef(null)
 
-    const meuAvatar = participantes.find(
-        pessoa => pessoa.nome === 'Você'
-    )?.avatar
+    // O avatar acompanha o tema ativo (Trocaí ou FIAP).
+    function obterAvatar(pessoa) {
+        return tema === 'fiap' ? pessoa.avatarFiap : pessoa.avatar
+    }
+
+    function obterParticipante(nome) {
+        return participantes.find(pessoa => pessoa.nome === nome) || participantes[1]
+    }
 
     function enviarMensagem(e) {
         e.preventDefault()
@@ -77,7 +82,6 @@ function ConteudoSala({ sala }) {
         const novaMensagem = {
             id: Date.now(),
             autor: 'Você',
-            avatar: meuAvatar,
             texto: texto.trim() || `📎 Arquivo: ${arquivo.name}`,
             horario
         }
@@ -111,152 +115,161 @@ function ConteudoSala({ sala }) {
     }
 
     return (
-        <main className={styles.container} data-room-id={sala.id}>
-            <div className={styles.roomLayout}>
+        <section className={styles.container} data-room-id={sala.id}>
+            <div className={styles.layout}>
 
-                {/* SIDEBAR */}
+                {/* LATERAL */}
 
-                <aside className={styles.sidebar}>
-
-                    <Link to="/praca" className={styles.backLink}>
-                        <span>←</span>
+                <aside className={styles.lateral}>
+                    <Button
+                        to="/praca"
+                        variant="neutral"
+                        size="sm"
+                        className={styles.voltar}
+                    >
+                        <ArrowLeftIcon size={16} aria-hidden="true" />
                         Voltar à Praça
-                    </Link>
+                    </Button>
 
-                    <div className={styles.roomInfo}>
-                        <h2>{sala.titulo}</h2>
-                        <span>#{sala.id.replaceAll('-', '')}</span>
+                    <div className={styles.salaInfo}>
+                        <h2 className={styles.salaTitulo}>{sala.titulo}</h2>
+                        <span className={styles.salaCodigo}>{codigoSala}</span>
                     </div>
 
-                    <div className={styles.affinityNotice}>
-                        <ShieldCheck size={17} strokeWidth={1.8} />
+                    <div className={styles.aviso}>
+                        <ShieldCheckIcon
+                            className={styles.avisoIcone}
+                            size={18}
+                            aria-hidden="true"
+                        />
 
-                        <p>
+                        <p className={styles.avisoTexto}>
                             Chat liberado por afinidade
-                            <strong>#{sala.id.replaceAll('-', '')}</strong>
+                            <strong className={styles.avisoCodigo}>
+                                {codigoSala}
+                            </strong>
                         </p>
                     </div>
 
                     {/* PARTICIPANTES */}
 
-                    <div className={styles.participantsSection}>
-                        <div className={styles.sectionTitle}>
-                            PRESENTES AGORA ({participantes.length})
-                        </div>
+                    <h3 className={styles.rotulo}>
+                        Presentes agora ({participantes.length})
+                    </h3>
 
-                        <div className={styles.participantsList}>
-                            {participantes.map(pessoa => (
-                                <div
-                                    key={pessoa.id}
-                                    className={styles.participant}
-                                >
-                                    <div className={styles.avatar}>
-                                        <img
-                                            src={pessoa.avatar}
-                                            alt={`Avatar de ${pessoa.nome}`}
-                                        />
-                                    </div>
+                    <ul className={styles.participantesLista}>
+                        {participantes.map(pessoa => (
+                            <li
+                                key={pessoa.id}
+                                className={styles.participanteItem}
+                            >
+                                <span className={styles.avatar}>
+                                    <img src={obterAvatar(pessoa)} alt="" />
+                                </span>
 
-                                    <span>{pessoa.nome}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                                {pessoa.nome}
+                            </li>
+                        ))}
+                    </ul>
                 </aside>
 
                 {/* ÁREA PRINCIPAL */}
 
-                <section className={styles.chatArea}>
+                <section className={styles.conversa}>
 
                     {/* CABEÇALHO */}
 
-                    <header className={styles.chatHeader}>
-                        <div className={styles.headerInfo}>
-                            <h2>{sala.titulo}</h2>
+                    <header className={styles.conversaTopo}>
+                        <div>
+                            <h2 className={styles.conversaTitulo}>
+                                {sala.titulo}
+                            </h2>
 
-                            <span>
+                            <span className={styles.conversaDetalhe}>
                                 {participantes.length} pessoas na sala
                             </span>
                         </div>
 
-                        <div className={styles.headerActions}>
-
-                            <button
-                                type="button"
-                                className={`${styles.actionButton} ${
-                                    audioAtivo ? styles.activeButton : ''
-                                }`}
+                        <div className={styles.conversaAcoes}>
+                            <Button
+                                variant={audioAtivo ? 'outline' : 'neutral'}
+                                size="sm"
                                 onClick={() => setAudioAtivo(!audioAtivo)}
                             >
-                                <Phone size={16} strokeWidth={1.8} />
-
+                                <PhoneIcon size={16} aria-hidden="true" />
                                 {audioAtivo ? 'Áudio ligado' : 'Áudio'}
-                            </button>
+                            </Button>
 
-                            <button
-                                type="button"
-                                className={`${styles.videoButton} ${
-                                    videoAtivo ? styles.videoActive : ''
-                                }`}
+                            <Button
+                                variant={videoAtivo ? 'outline' : 'primary'}
+                                size="sm"
                                 onClick={() => setVideoAtivo(!videoAtivo)}
                             >
-                                <Video size={16} strokeWidth={1.8} />
-
+                                <VideoCameraIcon size={16} aria-hidden="true" />
                                 {videoAtivo ? 'Vídeo ligado' : 'Iniciar Vídeo'}
-                            </button>
-
+                            </Button>
                         </div>
                     </header>
 
                     {/* PERGUNTA DA SALA */}
 
-                    <div className={styles.promptSection}>
-                        <div className={styles.promptInfo}>
-                            <span>DECK QUEBRA-GELO ATIVO</span>
-                            <p>{pergunta}</p>
+                    <div className={styles.quebraGelo}>
+                        <div className={styles.quebraGeloInfo}>
+                            <span className={styles.rotulo}>
+                                Deck quebra-gelo ativo
+                            </span>
+
+                            <p className={styles.quebraGeloTexto}>{pergunta}</p>
                         </div>
 
-                        <button
-                            type="button"
-                            className={styles.nextButton}
+                        <Button
+                            variant="neutral"
+                            size="sm"
+                            className={styles.quebraGeloBotao}
                             onClick={proximaPergunta}
+                            aria-label="Mostrar próxima pergunta quebra-gelo"
                         >
-                            <span>⤨</span>
+                            <ShuffleIcon size={16} aria-hidden="true" />
                             Próxima
-                        </button>
+                        </Button>
                     </div>
 
                     {/* MENSAGENS */}
 
                     <div
-                        className={styles.messagesArea}
+                        className={styles.mensagens}
                         ref={mensagensRef}
+                        role="log"
+                        aria-label="Mensagens da sala"
+                        tabIndex={0}
                     >
                         {mensagens.map(mensagem => (
                             <article
                                 key={mensagem.id}
-                                className={`${styles.message} ${
+                                className={`${styles.mensagem} ${
                                     mensagem.autor === 'Você'
-                                        ? styles.ownMessage
+                                        ? styles.mensagemPropria
                                         : ''
                                 }`}
                             >
-                                <div className={`${styles.avatar} ${styles.messageAvatar}`}>
+                                <span className={`${styles.avatar} ${styles.mensagemAvatar}`}>
                                     <img
-                                        src={mensagem.avatar}
-                                        alt={`Avatar de ${mensagem.autor}`}
+                                        src={obterAvatar(obterParticipante(mensagem.autor))}
+                                        alt=""
                                     />
-                                </div>
+                                </span>
 
-                                <div className={styles.messageContent}>
-                                    <span className={styles.messageAuthor}>
+                                <div className={styles.mensagemConteudo}>
+                                    <span className={styles.mensagemAutor}>
                                         {mensagem.autor}
                                     </span>
 
-                                    <div className={styles.messageBubble}>
-                                        <p>{mensagem.texto}</p>
+                                    <div className={styles.mensagemBalao}>
+                                        <p className={styles.mensagemTexto}>
+                                            {mensagem.texto}
+                                        </p>
 
-                                        <span className={styles.messageTime}>
+                                        <span className={styles.mensagemHorario}>
                                             {mensagem.horario}
                                         </span>
                                     </div>
@@ -268,51 +281,53 @@ function ConteudoSala({ sala }) {
                     {/* CAMPO DE MENSAGEM */}
 
                     <form
-                        className={styles.messageForm}
+                        className={styles.formMensagem}
                         onSubmit={enviarMensagem}
                     >
                         <input
                             type="file"
                             ref={arquivoRef}
-                            className={styles.hiddenFile}
+                            className={styles.inputArquivo}
                             onChange={e =>
                                 setArquivo(e.target.files[0] || null)
                             }
                         />
 
-                        <button
-                            type="button"
-                            className={styles.attachButton}
+                        <Button
+                            variant="neutral"
+                            className={styles.botaoIcone}
                             title="Anexar arquivo"
+                            aria-label="Anexar arquivo"
                             onClick={() => arquivoRef.current?.click()}
                         >
-                            <Paperclip size={17} strokeWidth={1.8} />
-                        </button>
+                            <PaperclipIcon size={18} aria-hidden="true" />
+                        </Button>
 
-                        <div className={styles.inputWrapper}>
-                            <input
-                                type="text"
-                                placeholder={
-                                    arquivo
-                                        ? arquivo.name
-                                        : 'Mande sua mensagem ou reaja...'
-                                }
-                                value={texto}
-                                onChange={e => setTexto(e.target.value)}
-                            />
-                        </div>
+                        <input
+                            type="text"
+                            className={styles.campoMensagem}
+                            aria-label="Mensagem"
+                            placeholder={
+                                arquivo
+                                    ? arquivo.name
+                                    : 'Mande sua mensagem ou reaja...'
+                            }
+                            value={texto}
+                            onChange={e => setTexto(e.target.value)}
+                        />
 
-                        <button
+                        <Button
                             type="submit"
-                            className={styles.sendButton}
+                            variant="primary"
+                            className={styles.botaoIcone}
                             title="Enviar mensagem"
                             aria-label="Enviar mensagem"
                         >
-                            <Send size={17} strokeWidth={1.8} />
-                        </button>
+                            <PaperPlaneRightIcon size={18} aria-hidden="true" />
+                        </Button>
                     </form>
                 </section>
             </div>
-        </main>
+        </section>
     )
 }

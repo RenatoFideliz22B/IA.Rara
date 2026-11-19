@@ -20,6 +20,16 @@ import seisImg from '../assets/avatars/6.png'
 import seteImg from '../assets/avatars/7.png'
 import oitoImg from '../assets/avatars/8.png'
 
+// AVATARES DO TEMA FIAP
+import noveImg from '../assets/avatars/9.png'
+import dezImg from '../assets/avatars/10.png'
+import onzeImg from '../assets/avatars/11.png'
+import dozeImg from '../assets/avatars/12.png'
+import trezeImg from '../assets/avatars/13.png'
+import catorzeImg from '../assets/avatars/14.png'
+import quinzeImg from '../assets/avatars/15.png'
+import dezesseisImg from '../assets/avatars/16.png'
+
 const avatares = [
     umImg,
     doisImg,
@@ -29,6 +39,17 @@ const avatares = [
     seisImg,
     seteImg,
     oitoImg
+]
+
+const avataresFiap = [
+    noveImg,
+    dezImg,
+    onzeImg,
+    dozeImg,
+    trezeImg,
+    catorzeImg,
+    quinzeImg,
+    dezesseisImg
 ]
 
 const nomesParticipantes = [
@@ -49,6 +70,7 @@ function criarParticipantes(total) {
         id: index + 1,
         nome: nomesParticipantes[index],
         avatar: avatares[index % avatares.length],
+        avatarFiap: avataresFiap[index % avataresFiap.length],
         online: true
     }))
 }

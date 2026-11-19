@@ -1,140 +1,159 @@
-
 /* SALA DE INTERAÇÃO */
+
 .container {
-    width: 100%;
-    min-height: calc(100vh - 100px);
-    padding: 20px 28px;
-    background: var(--color-bg);
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    font-family: var(--ff-secondary);
-    color: var(--color-text);
+    width: min(1200px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 24px 0 32px;
 }
 
-.roomLayout {
-    width: 100%;
-    max-width: 1200px;
-    min-height: 600px;
-    height: calc(100vh - 140px);
-    max-height: 850px;
+.layout {
     display: grid;
     grid-template-columns: 255px minmax(0, 1fr);
-    gap: 12px;
+    gap: 16px;
+    height: calc(100vh - 140px);
+    min-height: 600px;
+    max-height: 850px;
 }
 
-/* SIDEBAR */
-.sidebar {
+/* SALA NÃO ENCONTRADA */
+
+.naoEncontrada {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    width: min(480px, 100%);
+    margin: 32px auto 0;
+    padding: 24px;
     background: var(--color-bg-section);
     border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 20px 16px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+}
+
+.naoEncontradaTexto {
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    line-height: 1.4;
+}
+
+/* LATERAL: INFORMAÇÕES DA SALA E PARTICIPANTES */
+
+.lateral {
     display: flex;
     flex-direction: column;
     min-width: 0;
-}
-
-.backLink {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    text-decoration: none;
-    color: var(--color-muted);
-    font-size: 12px;
-    margin-bottom: 22px;
-    transition: color 0.2s;
-}
-
-.backLink:hover {
-    color: var(--color-primary);
-}
-
-.backLink span {
-    font-size: 18px;
-}
-
-.roomInfo {
-    margin-bottom: 18px;
-}
-
-.roomInfo h2 {
-    font-family: var(--ff-primary);
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.roomInfo span {
-    font-size: 11px;
-    color: var(--color-muted);
-}
-
-/* AVISO DE AFINIDADE */
-.affinityNotice {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    background: #F5F5F5;
+    padding: 20px 16px;
+    overflow-y: auto;
+    background: var(--color-bg-section);
     border: 1px solid var(--color-border);
-    border-radius: 7px;
-    padding: 10px;
-    margin-bottom: 22px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
 }
 
-.affinityNotice > span {
-    font-size: 17px;
-    color: var(--color-accent);
+.voltar {
+    align-self: flex-start;
+    margin-bottom: 20px;
 }
 
-.affinityNotice p {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    font-size: 10px;
+.salaInfo {
+    margin-bottom: 16px;
+}
+
+.salaTitulo {
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-subtitle);
+    font-weight: 700;
     line-height: 1.3;
 }
 
-.affinityNotice strong {
-    font-size: 10px;
-    font-weight: 600;
-}
-
-/* PARTICIPANTES */
-.participantsSection {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.sectionTitle {
+.salaCodigo {
+    display: block;
+    margin-top: 2px;
     color: var(--color-muted);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    line-height: 1.3;
 }
 
-.participantsList {
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
+/* AVISO DE AFINIDADE */
 
-.participant {
+.aviso {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 12px;
+    margin-bottom: 20px;
+    padding: 10px 12px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
 }
 
-/* AVATARES COM IMAGENS */
+.avisoIcone {
+    flex: 0 0 auto;
+    color: var(--color-text-accent);
+}
+
+.avisoTexto {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    line-height: 1.3;
+}
+
+.avisoCodigo {
+    color: var(--color-text);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* PARTICIPANTES */
+
+.rotulo {
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.participantesLista {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.participanteItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    line-height: 1.3;
+}
+
+/* AVATARES (os mesmos na lista e nas mensagens) */
+
 .avatar {
-    width: 31px;
-    height: 31px;
-    flex-shrink: 0;
-    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 auto;
     overflow: hidden;
-    border: 2px solid var(--color-primary);
-    background: #F0F0F0;
+    background: var(--color-bg);
+    border: 2px solid var(--color-avatar-border);
+    border-radius: 50%;
 }
 
 .avatar img {
@@ -146,435 +165,378 @@
 }
 
 /* ÁREA DE CONVERSA */
-.chatArea {
-    background: var(--color-bg-section);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    min-width: 0;
-    min-height: 0;
+
+.conversa {
     display: flex;
     flex-direction: column;
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
+    background: var(--color-bg-section);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
 }
 
-/* CABEÇALHO */
-.chatHeader {
-    min-height: 62px;
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--color-border);
+.conversaTopo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    min-height: 64px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
 }
 
-.headerInfo h2 {
-    font-family: var(--ff-primary);
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 3px;
+.conversaTitulo {
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-subtitle);
+    font-weight: 700;
+    line-height: 1.3;
 }
 
-.headerInfo span {
-    font-size: 10px;
+.conversaDetalhe {
+    display: block;
+    margin-top: 2px;
     color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    line-height: 1.3;
 }
 
-.headerActions {
+.conversaAcoes {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.actionButton,
-.videoButton {
-    min-height: 36px;
-    padding: 0 13px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    transition: 0.2s;
-}
-
-.actionButton {
-    background: white;
-    border: 1px solid var(--color-accent);
-    color: var(--color-accent);
-}
-
-.actionButton:hover,
-.activeButton {
-    background: #E8ECFF;
-}
-
-.videoButton {
-    background: var(--color-secondary);
-    border: 1px solid #A9DC00;
-    color: #172000;
-    font-weight: 600;
-}
-
-.videoButton:hover {
-    background: #B6EC00;
-}
-
-.videoActive {
-    background: var(--color-accent);
-    color: white;
-    border-color: var(--color-accent);
-}
-
 /* PERGUNTA QUEBRA-GELO */
-.promptSection {
-    min-height: 52px;
-    padding: 8px 13px;
-    background: #F5F5F5;
-    border-bottom: 1px solid var(--color-border);
+
+.quebraGelo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    padding: 12px 16px;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
 }
 
-.promptInfo {
-    min-width: 0;
-}
-
-.promptInfo > span {
-    display: block;
-    color: var(--color-muted);
-    font-size: 9px;
-    letter-spacing: 0.5px;
-    margin-bottom: 3px;
-    font-weight: 500;
-}
-
-.promptInfo p {
-    font-size: 11px;
-    line-height: 1.4;
-}
-
-.nextButton {
-    flex-shrink: 0;
-    background: white;
-    border: 1px solid var(--color-accent);
-    color: var(--color-text);
-    border-radius: 7px;
-    padding: 7px 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    transition: 0.2s;
-}
-
-.nextButton:hover {
-    background: #E8ECFF;
-}
-
-.nextButton span {
-    font-size: 14px;
-}
-
-/* MENSAGENS */
-.messagesArea {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    padding: 22px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-    scroll-behavior: smooth;
-}
-
-.messagesArea::-webkit-scrollbar {
-    width: 5px;
-}
-
-.messagesArea::-webkit-scrollbar-thumb {
-    background: #D4D4D4;
-    border-radius: 10px;
-}
-
-.message {
-    display: flex;
-    align-items: flex-end;
-    gap: 9px;
-    max-width: 85%;
-}
-
-.messageAvatar {
-    margin-bottom: 2px;
-}
-
-.messageContent {
-    min-width: 0;
+.quebraGeloInfo {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0;
 }
 
-.messageAuthor {
-    color: var(--color-primary);
-    font-size: 10px;
-    font-weight: 500;
-    padding-left: 11px;
+.quebraGeloTexto {
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    line-height: 1.4;
 }
 
-.messageBubble {
+.quebraGeloBotao {
+    flex: 0 0 auto;
+}
+
+/* MENSAGENS */
+
+.mensagens {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    padding: 20px 16px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-muted) 50%, transparent) transparent;
+}
+
+.mensagens::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mensagens::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-muted) 50%, transparent);
+    border-radius: 999px;
+}
+
+.mensagem {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 85%;
+}
+
+.mensagemAvatar {
+    margin-bottom: 2px;
+}
+
+.mensagemConteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.mensagemAutor {
+    padding-left: 12px;
+    color: var(--color-text-accent);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.mensagemBalao {
     position: relative;
-    background: #F3F3F3;
-    border: 1px solid #DADADA;
-    border-radius: 12px 12px 12px 2px;
-    padding: 10px 12px 19px;
     min-width: 150px;
     max-width: 100%;
+    padding: 10px 14px 26px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px 12px 12px 2px;
 }
 
-.messageBubble p {
-    font-size: 11px;
+.mensagemTexto {
+    color: var(--color-text);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
     line-height: 1.5;
     overflow-wrap: anywhere;
 }
 
-.messageTime {
+.mensagemHorario {
     position: absolute;
-    right: 9px;
-    bottom: 5px;
-    color: #888;
-    font-size: 8px;
+    right: 12px;
+    bottom: 6px;
+    color: var(--color-muted);
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-label);
+    line-height: 1;
 }
 
-/* MENSAGENS DO USUARIO VOCE */
-.ownMessage {
+/* MENSAGENS DO PRÓPRIO USUÁRIO */
+
+.mensagemPropria {
     align-self: flex-end;
     flex-direction: row-reverse;
 }
 
-.ownMessage .messageContent {
+.mensagemPropria .mensagemConteudo {
     align-items: flex-end;
 }
 
-.ownMessage .messageAuthor {
+.mensagemPropria .mensagemAutor {
+    padding-right: 12px;
     padding-left: 0;
-    padding-right: 11px;
 }
 
-.ownMessage .messageBubble {
-    background: #EEF0FF;
-    border-color: #CFD4FF;
+.mensagemPropria .mensagemBalao {
+    background: var(--color-bubble-own-bg);
+    border-color: var(--color-bubble-own-border);
     border-radius: 12px 12px 2px 12px;
 }
 
 /* CAMPO DE MENSAGEM */
-.messageForm {
-    min-height: 65px;
-    padding: 10px 12px;
-    border-top: 1px solid var(--color-border);
+
+.formMensagem {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--color-border);
 }
 
-.attachButton {
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
-    background: white;
-    border: 1px solid var(--color-border);
-    border-radius: 9px;
-    font-size: 18px;
-    color: var(--color-muted);
-    transition: 0.2s;
+.formMensagem .botaoIcone {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    padding: 0;
 }
 
-.attachButton:hover {
-    background: #F0F0F0;
-}
-
-.inputWrapper {
+.campoMensagem {
     flex: 1;
     min-width: 0;
-}
-
-.inputWrapper input {
-    width: 100%;
-    height: 36px;
+    height: 40px;
     padding: 0 12px;
-    background: #F5F5F5;
+    background: var(--color-bg);
     border: 1px solid var(--color-border);
-    border-radius: 9px;
+    border-radius: 8px;
     outline: none;
-    font-size: 11px;
     color: var(--color-text);
-    transition: border 0.2s;
+    font-family: var(--ff-secondary);
+    font-size: var(--fs-text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.inputWrapper input:focus {
-    border-color: var(--color-primary);
+.campoMensagem::placeholder {
+    color: var(--color-muted);
 }
 
-.inputWrapper input::placeholder {
-    color: #999;
+.campoMensagem:focus {
+    border-color: var(--color-focus);
+    box-shadow: var(--shadow-focus);
 }
 
-.sendButton {
-    width: 35px;
-    height: 35px;
-    flex-shrink: 0;
-    background: var(--color-secondary);
-    border: 1px solid #A9DC00;
-    border-radius: 9px;
-    color: #263000;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-}
-
-.sendButton:hover {
-    background: #B6EC00;
-    transform: scale(1.04);
-}
-
-.hiddenFile {
+.inputArquivo {
     display: none;
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 800px) {
+/* TELAS GRANDES */
 
+@media (min-width: 2400px) and (min-height: 1200px) {
     .container {
-        padding: 14px;
+        width: min(1600px, calc(100% - 48px));
+        padding: 40px 0 56px;
     }
 
-    .roomLayout {
-        grid-template-columns: 190px minmax(0, 1fr);
+    .layout {
+        grid-template-columns: 340px minmax(0, 1fr);
+        gap: 24px;
+        height: calc(100vh - 200px);
+        max-height: 1100px;
+    }
+
+    .lateral {
+        padding: 28px 24px;
+    }
+
+    .salaTitulo,
+    .conversaTitulo {
+        font-size: 22px;
+    }
+
+    .participanteItem,
+    .quebraGeloTexto,
+    .mensagemTexto,
+    .campoMensagem {
+        font-size: 18px;
+    }
+
+    .salaCodigo,
+    .avisoTexto,
+    .rotulo,
+    .conversaDetalhe,
+    .mensagemAutor,
+    .mensagemHorario {
+        font-size: 15px;
+    }
+
+    .avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .campoMensagem,
+    .formMensagem .botaoIcone {
+        height: 48px;
+    }
+
+    .formMensagem .botaoIcone {
+        width: 48px;
+    }
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 200px minmax(0, 1fr);
         gap: 8px;
         height: calc(100vh - 120px);
     }
 
-    .sidebar {
-        padding: 16px 11px;
+    .lateral {
+        padding: 16px 12px;
     }
 
-    .chatHeader {
-        padding: 10px;
+    .conversaTopo {
+        padding: 12px;
     }
 
-    .headerActions {
-        gap: 5px;
+    .conversaAcoes {
+        gap: 6px;
     }
 
-    .actionButton,
-    .videoButton {
-        padding: 0 8px;
-        font-size: 10px;
-    }
-
-    .message {
+    .mensagem {
         max-width: 95%;
     }
 }
 
 @media (max-width: 600px) {
-
     .container {
-        padding: 10px;
-        min-height: calc(100vh - 80px);
+        padding: 16px 0 96px;
     }
 
-    .roomLayout {
+    .layout {
         display: flex;
         flex-direction: column;
+        gap: 12px;
         height: auto;
         min-height: calc(100vh - 100px);
     }
 
-    .sidebar {
-        padding: 12px;
+    .lateral {
+        padding: 16px;
+        overflow-y: visible;
     }
 
-    .backLink {
+    .voltar {
         margin-bottom: 12px;
     }
 
-    .roomInfo {
+    .salaInfo {
         margin-bottom: 12px;
     }
 
-    .affinityNotice {
-        margin-bottom: 14px;
+    .aviso {
+        margin-bottom: 16px;
     }
 
-    .participantsSection {
-        gap: 10px;
-    }
-
-    .participantsList {
+    .participantesLista {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 12px 16px;
     }
 
-    .participant {
-        gap: 5px;
-        font-size: 10px;
-    }
-
-    .chatArea {
+    .conversa {
         flex: 1;
         min-height: 520px;
     }
 
-    .chatHeader {
+    .conversaTopo {
         flex-wrap: wrap;
     }
 
-    .headerActions {
+    .conversaAcoes {
         width: 100%;
         justify-content: flex-end;
     }
 
-    .promptSection {
-        align-items: center;
+    .mensagens {
+        padding: 16px 12px;
     }
 
-    .messagesArea {
-        padding: 16px 10px;
-    }
-
-    .message {
+    .mensagem {
         max-width: 100%;
     }
 
-    .messageBubble {
+    .mensagemBalao {
         min-width: 0;
     }
 
-    .messageForm {
-        padding: 9px;
+    .formMensagem {
+        padding: 12px;
     }
 }
 
-@media (max-width: 380px) {
-
-    .headerInfo h2 {
-        font-size: 13px;
-    }
-
-    .promptInfo p {
-        font-size: 10px;
-    }
-
-    .nextButton {
-        padding: 7px;
-        font-size: 9px;
+@media (max-width: 480px) {
+    .quebraGelo {
+        padding: 12px;
     }
 }

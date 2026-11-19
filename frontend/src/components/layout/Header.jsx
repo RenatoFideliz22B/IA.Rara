@@ -1,9 +1,9 @@
-import { useState } from 'react'
+
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import logoTrocaí from '../../assets/images/logoBranca.png'
 import logoFiap from '../../assets/images/fiapLogo.png'
-
 
 import avatarUm from '../../assets/avatars/1.png'
 import avatarDois from '../../assets/avatars/2.png'
@@ -44,12 +44,36 @@ const avatares = {
     16: avatarDezesseis
 }
 
-export default function Header() {
-    const [perfil] = useState(() => {
-        const dadosSalvos = localStorage.getItem('trocaiPerfil')
+const NOME_COMPLETO = 'Ana Beatriz Souza Almeida'
 
-        return dadosSalvos ? JSON.parse(dadosSalvos) : null
-    })
+function obterPerfilSalvo() {
+    try {
+        return JSON.parse(localStorage.getItem('trocaiPerfil')) || {}
+    } catch {
+        return {}
+    }
+}
+
+export default function Header() {
+    const [perfil, setPerfil] = useState(obterPerfilSalvo)
+
+    useEffect(() => {
+        function atualizarPerfil() {
+            setPerfil(obterPerfilSalvo())
+        }
+
+        window.addEventListener(
+            'trocaiPerfilAtualizado',
+            atualizarPerfil
+        )
+
+        return () => {
+            window.removeEventListener(
+                'trocaiPerfilAtualizado',
+                atualizarPerfil
+            )
+        }
+    }, [])
 
     const tema = localStorage.getItem('trocaiTema')
     const logoAtual = tema === 'fiap' ? logoFiap : logoTrocaí
@@ -57,6 +81,8 @@ export default function Header() {
     const avatar = perfil?.avatar?.tipo === 'personalizado'
         ? perfil.avatar.imagem
         : avatares[perfil?.avatar?.id]
+
+    const nomeExibido = perfil?.apelido?.trim() || NOME_COMPLETO
 
     return (
         <header className={styles.header}>
@@ -78,7 +104,9 @@ export default function Header() {
                         className={styles.profileLink}
                         aria-label="Meu perfil"
                     >
-                        <span className={styles.profileText}>Você</span>
+                        <span className={styles.profileText}>
+                            {nomeExibido}
+                        </span>
 
                         <span className={styles.avatar}>
                             {avatar && (
