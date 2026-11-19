@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { LockIcon, PlusIcon, XIcon } from '@phosphor-icons/react'

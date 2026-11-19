@@ -61,10 +61,14 @@
   --ff-secondary: 'Inter', sans-serif;
 
   --fs-display: 36px;
-  --fs-title: 20px;
+  /* --fs-title: 20px;
   --fs-subtitle: 16px;
   --fs-text: 14px;
-  --fs-label: 12px;
+  --fs-label: 12px; */
+  --fs-title: 24px;
+  --fs-subtitle: 20px;
+  --fs-text: 16px;
+  --fs-label: 14px;
 }
 
 :root[data-theme='fiap'] {
@@ -115,6 +119,7 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--ff-secondary);
+  font-size: var(--fs-text);
 }
 
 button,
@@ -125,6 +130,15 @@ textarea {
 
 button {
   cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ff-primary);
 }
 
 :focus-visible {
@@ -144,4 +158,15 @@ button {
 
 .skip-link:focus {
   top: 8px;
+}
+
+/* TELAS GRANDES: a escala de texto cresce em um só lugar, todo o site acompanha */
+@media (min-width: 2400px) and (min-height: 1200px) {
+  :root {
+    --fs-display: 48px;
+    --fs-title: 26px;
+    --fs-subtitle: 22px;
+    --fs-text: 18px;
+    --fs-label: 15px;
+  }
 }

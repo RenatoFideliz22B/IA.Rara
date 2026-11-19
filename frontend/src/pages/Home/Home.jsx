@@ -1,4 +1,3 @@
-
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BookmarkSimple } from '@phosphor-icons/react'
@@ -350,9 +349,12 @@ function Salas({
     salas,
     participando,
     respostas,
+    alunos,
     onAbrirEncontro,
     botaoEncontroRef
 }) {
+    const gabriel = alunos.find(aluno => aluno.id === 'gabriel')
+
     return (
         <section className={styles.salas} aria-labelledby="titulo-salas">
             <h2 id="titulo-salas" className={styles.salasTitulo}>
@@ -467,6 +469,14 @@ function Salas({
 
                             <div className={styles.participantesLista}>
                                 <div className={styles.participanteItem}>
+                                    {gabriel && (
+                                        <img
+                                            className={styles.participanteAvatar}
+                                            src={gabriel.avatar}
+                                            alt=""
+                                        />
+                                    )}
+
                                     <span className={styles.participanteInfo}>
                                         <strong>Gabriel Oliveira</strong>
                                         <span>Respondeu às perguntas</span>
@@ -672,7 +682,6 @@ function ModalAluno({ aluno, onFechar }) {
                     <p className={styles.modalAlunoApelido}>
                         {aluno.apelido}
                     </p>
-
                 </div>
 
                 <div className={styles.modalAlunoSecao}>
@@ -1093,14 +1102,14 @@ export default function Home() {
                             META COLETIVA DA TURMA
                         </p>
 
-                        <h4 className={styles.metaSubtitulo}>
+                        <h2 className={styles.metaSubtitulo}>
                             Estamos quase lá, juntos
-                        </h4>
+                        </h2>
                     </div>
 
-                    <h3 className={styles.metaPorcentagem}>
+                    <p className={styles.metaPorcentagem}>
                         {progresso}%
-                    </h3>
+                    </p>
                 </div>
 
                 <div
@@ -1168,6 +1177,7 @@ export default function Home() {
                 salas={salas}
                 participando={participando}
                 respostas={respostasEnviadas || respostas}
+                alunos={alunos}
                 botaoEncontroRef={botaoEncontroRef}
                 onAbrirEncontro={() => {
                     if (!participando) abrirModalEncontro()

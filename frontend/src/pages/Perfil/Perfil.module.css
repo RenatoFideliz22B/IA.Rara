@@ -40,7 +40,7 @@
 .cardTitulo {
     margin-bottom: 16px;
     color: var(--color-text);
-    font-family: var(--ff-secondary);
+    font-family: var(--ff-primary);
     font-size: var(--fs-subtitle);
     font-weight: 700;
     line-height: 1.3;
@@ -276,7 +276,7 @@
 
 .modalTitulo {
     color: var(--color-text);
-    font-family: var(--ff-secondary);
+    font-family: var(--ff-primary);
     font-size: var(--fs-subtitle);
     font-weight: 700;
     line-height: 1.3;
@@ -384,27 +384,6 @@
 
     .card {
         padding: 36px;
-    }
-
-    .titulo {
-        font-size: 26px;
-    }
-
-    .cardTitulo {
-        font-size: 22px;
-    }
-
-    .texto,
-    .campoRotulo,
-    .input,
-    .tag,
-    .sucesso {
-        font-size: 18px;
-    }
-
-    .contador,
-    .campoSelo {
-        font-size: 15px;
     }
 }
 

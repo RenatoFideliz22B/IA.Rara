@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Cadastro.module.css'
@@ -158,9 +157,9 @@ export default function Cadastro() {
 
                 <div className={styles.barra}></div>
 
-                <h2 className={styles.titulo}>
+                <h1 className={styles.titulo}>
                     Monte sua identidade na turma
-                </h2>
+                </h1>
 
                 <fieldset className={styles.grupo}>
                     <legend className={styles.subtitulo}>

@@ -26,7 +26,7 @@ export default function Sala() {
         return (
             <section className={styles.container}>
                 <div className={styles.naoEncontrada}>
-                    <h2 className={styles.salaTitulo}>Sala não encontrada</h2>
+                    <h1 className={styles.salaTitulo}>Sala não encontrada</h1>
 
                     <p className={styles.naoEncontradaTexto}>
                         Essa sala não existe. Volte para a Praça e escolha uma das suas salas.
@@ -132,7 +132,7 @@ function ConteudoSala({ sala }) {
                     </Button>
 
                     <div className={styles.salaInfo}>
-                        <h2 className={styles.salaTitulo}>{sala.titulo}</h2>
+                        <h1 className={styles.salaTitulo}>{sala.titulo}</h1>
                         <span className={styles.salaCodigo}>{codigoSala}</span>
                     </div>
 
@@ -153,9 +153,9 @@ function ConteudoSala({ sala }) {
 
                     {/* PARTICIPANTES */}
 
-                    <h3 className={styles.rotulo}>
+                    <h2 className={styles.rotulo}>
                         Presentes agora ({participantes.length})
-                    </h3>
+                    </h2>
 
                     <ul className={styles.participantesLista}>
                         {participantes.map(pessoa => (
@@ -181,9 +181,9 @@ function ConteudoSala({ sala }) {
 
                     <header className={styles.conversaTopo}>
                         <div>
-                            <h2 className={styles.conversaTitulo}>
+                            <p className={styles.conversaTitulo}>
                                 {sala.titulo}
-                            </h2>
+                            </p>
 
                             <span className={styles.conversaDetalhe}>
                                 {participantes.length} pessoas na sala

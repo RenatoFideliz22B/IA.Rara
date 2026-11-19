@@ -16,7 +16,6 @@
     --ia-img-y: 0%;
 }
 
-/* Imagem da IA (botão, cabeçalho e boas-vindas) */
 .assistant-launcher img,
 .assistant-avatar img,
 .welcome-icon img {
@@ -29,9 +28,6 @@
     top: var(--ia-img-y);
     pointer-events: none;
 }
-
-/* BOTÃO FLUTUANTE
-   O ícone (iconeIAPadrao ou iconeIAFiap) já traz o círculo e a borda desenhados. */
 
 .assistant-launcher {
     position: relative;
@@ -63,13 +59,10 @@
     transform: scale(0.94);
 }
 
-/* Com a janela aberta, o botão mostra o "×" */
 .launcher-active {
     background: var(--ia-launcher-bg);
     border: 2px solid var(--ia-border);
 }
-
-/* DICA (pop-up acima do botão) */
 
 .assistant-tip {
     position: absolute;
@@ -122,8 +115,6 @@
     height: 14px;
 }
 
-/* JANELA DO ASSISTENTE */
-
 .assistant-window {
     position: absolute;
     right: 0;
@@ -171,8 +162,6 @@
         transform: translateY(0) scale(1);
     }
 }
-
-/* CABEÇALHO */
 
 .assistant-header {
     min-height: 82px;
@@ -262,8 +251,6 @@
     cursor: not-allowed;
 }
 
-/* ÁREA DE CONVERSA */
-
 .assistant-chat {
     position: relative;
     flex: 1;
@@ -319,8 +306,6 @@
     line-height: 1.7;
 }
 
-/* MENSAGENS */
-
 .assistant-messages {
     display: flex;
     flex-direction: column;
@@ -353,8 +338,6 @@
     border-bottom-left-radius: 5px;
     box-shadow: var(--shadow-soft);
 }
-
-/* INDICADOR DE CARREGAMENTO */
 
 .loading-message {
     display: flex;
@@ -394,16 +377,12 @@
     }
 }
 
-/* FOOTER */
-
 .assistant-footer {
     position: relative;
     padding: 14px 17px 13px;
     background: transparent;
     border-top: none;
 }
-
-/* CAMPO DE MENSAGEM */
 
 .assistant-form {
     display: flex;
@@ -462,8 +441,6 @@
     cursor: not-allowed;
 }
 
-/* AVISO */
-
 .assistant-disclaimer {
     margin-top: 10px;
     color: var(--color-muted);
@@ -471,8 +448,6 @@
     text-align: center;
     line-height: 1.5;
 }
-
-/* TEXTO FORMATADO (MARKDOWN) */
 
 .ai-message p {
     margin-bottom: 8px;
@@ -528,8 +503,6 @@
     border-left: 3px solid var(--ia-title);
     color: var(--color-muted);
 }
-
-/* RESPONSIVIDADE */
 
 @media (max-width: 480px) {
     .assistant-widget {

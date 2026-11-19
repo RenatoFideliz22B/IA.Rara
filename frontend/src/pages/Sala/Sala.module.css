@@ -1,5 +1,3 @@
-/* SALA DE INTERAÇÃO */
-
 .container {
     width: min(1200px, calc(100% - 32px));
     margin: 0 auto;
@@ -63,7 +61,7 @@
 
 .salaTitulo {
     color: var(--color-text);
-    font-family: var(--ff-secondary);
+    font-family: var(--ff-primary);
     font-size: var(--fs-subtitle);
     font-weight: 700;
     line-height: 1.3;
@@ -190,7 +188,7 @@
 
 .conversaTitulo {
     color: var(--color-text);
-    font-family: var(--ff-secondary);
+    font-family: var(--ff-primary);
     font-size: var(--fs-subtitle);
     font-weight: 700;
     line-height: 1.3;
@@ -404,27 +402,6 @@
 
     .lateral {
         padding: 28px 24px;
-    }
-
-    .salaTitulo,
-    .conversaTitulo {
-        font-size: 22px;
-    }
-
-    .participanteItem,
-    .quebraGeloTexto,
-    .mensagemTexto,
-    .campoMensagem {
-        font-size: 18px;
-    }
-
-    .salaCodigo,
-    .avisoTexto,
-    .rotulo,
-    .conversaDetalhe,
-    .mensagemAutor,
-    .mensagemHorario {
-        font-size: 15px;
     }
 
     .avatar {

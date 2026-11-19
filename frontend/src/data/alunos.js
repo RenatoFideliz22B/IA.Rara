@@ -1,4 +1,3 @@
-
 import avatarUm from '../assets/avatars/1.png'
 import avatarDois from '../assets/avatars/2.png'
 import avatarTres from '../assets/avatars/3.png'

@@ -1,4 +1,3 @@
-// AppLayout.jsx
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import AssistantWidget from '../AssistantWidget/AssistantWidget'
